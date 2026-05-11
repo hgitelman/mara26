@@ -16,81 +16,33 @@
   --purple:#7a5ab8;--purple-text:#a080d8;
   --plyo:#e07a30;--plyo-dim:#5a2e10;--plyo-text:#f09050;
   --text:#e6e4dc;--text-dim:#8a8880;--text-muted:#4a4a45;
-  --nav-h:56px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;}
-
-/* ── SHELL ── */
-#shell{
-  position:fixed;inset:0;
-  display:grid;
-  grid-template-rows:auto 1fr auto;
-}
-#topBar{
-  background:var(--bg);border-bottom:1px solid var(--border);
-  padding:0 20px;height:52px;
-  display:flex;align-items:center;justify-content:space-between;
-  padding-top:env(safe-area-inset-top,0px);
-}
+#shell{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr auto;}
+#topBar{background:var(--bg);border-bottom:1px solid var(--border);padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;padding-top:env(safe-area-inset-top,0px);}
 #viewPort{position:relative;overflow:hidden;}
-#bottomNav{
-  background:var(--surface);border-top:1px solid var(--border);
-  display:flex;
-  padding-bottom:env(safe-area-inset-bottom,0px);
-}
-
-/* ── VIEWS ── */
-.view{
-  position:absolute;inset:0;
-  overflow-y:scroll;-webkit-overflow-scrolling:touch;
-  display:none;
-}
+#bottomNav{background:var(--surface);border-top:1px solid var(--border);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);}
+.view{position:absolute;inset:0;overflow-y:scroll;-webkit-overflow-scrolling:touch;display:none;}
 .view.active{display:block;}
-
-/* views that need flex column layout get an inner wrapper */
 #weekDetailView,#workoutView{overflow-y:hidden;}
-#weekDetailView .view-flex,#workoutView .view-flex{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  overflow:hidden;
-}
-
-/* ── NAV ── */
-.nav-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:3px;padding:10px 0;cursor:pointer;border:none;background:none;
-  color:var(--text-muted);transition:color 0.15s;
-}
+#weekDetailView .view-flex,#workoutView .view-flex{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 0;cursor:pointer;border:none;background:none;color:var(--text-muted);}
 .nav-btn.active{color:var(--amber);}
 .nav-icon{font-size:19px;}
 .nav-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;}
-
-/* ── TOP BAR ── */
 .logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;}
 .logo em{color:var(--amber);font-style:normal;}
 .overall-ring{position:relative;width:34px;height:34px;}
 .overall-ring svg{transform:rotate(-90deg);}
 .ring-bg{fill:none;stroke:var(--border2);stroke-width:3;}
-.ring-fill{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset 0.5s ease;}
+.ring-fill{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;}
 .ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:8px;color:var(--amber-text);font-weight:500;}
-
-/* ── SCROLLBARS ── */
 ::-webkit-scrollbar{display:none;}*{scrollbar-width:none;}
 
-/* ── WEEK LIST ── */
-.phase-header{
-  padding:18px 20px 6px;
-  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;
-  color:var(--text-muted);text-transform:uppercase;
-  background:var(--bg);position:sticky;top:0;z-index:2;
-}
-.week-card{
-  margin:0 16px 8px;background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;padding:15px;cursor:pointer;
-  display:flex;align-items:center;gap:13px;
-  position:relative;overflow:hidden;user-select:none;
-}
+/* WEEK LIST */
+.phase-header{padding:18px 20px 6px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;background:var(--bg);position:sticky;top:0;z-index:2;}
+.week-card{margin:0 16px 8px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px;cursor:pointer;display:flex;align-items:center;gap:13px;position:relative;overflow:hidden;user-select:none;}
 .week-card:active{opacity:0.7;}
 .week-card.current-week{border-color:var(--amber-dim);}
 .week-card.current-week::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);border-radius:3px 0 0 3px;}
@@ -112,12 +64,12 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .pc-REBUILD{color:var(--green-text);border-color:var(--green-dim);}
 .pc-BASE{color:var(--blue-text);border-color:#1e3a5e;}
 .pc-QUALITY{color:var(--amber-text);border-color:var(--amber-dim);}
-.pc-BERLIN{color:#e07060;border-color:#5a2020;}
+.pc-AMSTERDAM{color:#e07060;border-color:#5a2020;}
 .pc-RECOVERY{color:var(--purple-text);border-color:#3a2a5a;}
 .pc-TAPER{color:var(--blue-text);border-color:#1e3a5e;}
 .pc-RACE{color:var(--green-text);border-color:var(--green-dim);}
 
-/* ── DETAIL ── */
+/* DETAIL */
 .detail-header{padding:14px 20px 10px;background:var(--bg);border-bottom:1px solid var(--border);flex-shrink:0;}
 .detail-back{display:flex;align-items:center;gap:6px;color:var(--amber-text);font-size:14px;cursor:pointer;margin-bottom:10px;width:fit-content;}
 .detail-back:active{opacity:0.7;}
@@ -133,29 +85,28 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .dp-fill{height:100%;background:var(--green);border-radius:2px;}
 .dp-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-dim);white-space:nowrap;}
 .detail-scroll{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;padding:12px 16px 32px;}
-.day-row{display:flex;align-items:flex-start;gap:13px;padding:13px 15px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:7px;cursor:pointer;user-select:none;min-height:56px;position:relative;}
-.day-row:active{opacity:0.7;}
-.day-row.done{border-color:var(--green-dim);background:var(--green-glow);}
-.day-checkbox{width:22px;height:22px;border-radius:6px;border:2px solid var(--border2);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-.day-row.done .day-checkbox{background:var(--green);border-color:var(--green);}
-.check-inner{opacity:0;color:white;font-size:12px;font-weight:700;}
-.day-row.done .check-inner{opacity:1;}
-.day-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--text-muted);min-width:28px;padding-top:3px;text-transform:uppercase;}
-.day-row.done .day-label{color:var(--text-muted);}
-.day-content{flex:1;min-width:0;}
-.day-text{font-size:14px;line-height:1.4;}
-.day-row.done .day-text{color:var(--text-muted);text-decoration:line-through;text-decoration-color:var(--border2);}
-.day-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
-.tag{font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;letter-spacing:0.5px;text-transform:uppercase;border:1px solid;}
-.tag.run{color:var(--blue-text);border-color:#1e3a5e;background:rgba(61,122,181,0.12);}
-.tag.quality{color:var(--amber-text);border-color:var(--amber-dim);background:rgba(200,134,58,0.12);}
-.tag.yoga{color:var(--green-text);border-color:var(--green-dim);background:rgba(74,158,107,0.10);}
-.tag.strength{color:#e07060;border-color:#5a2020;background:rgba(184,48,48,0.12);}
-.tag.stairmaster{color:var(--purple-text);border-color:#3a2a5a;background:rgba(122,90,184,0.12);}
-.tag.plyo{color:var(--plyo-text);border-color:var(--plyo-dim);background:rgba(224,122,48,0.12);}
-.tag.rest{color:var(--text-muted);border-color:var(--border);background:transparent;}
-.tag.race{color:var(--amber-text);border-color:var(--amber);background:rgba(200,134,58,0.2);font-weight:600;}
 .section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;margin:14px 0 7px;}
+
+/* DAY CARD */
+.day-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;}
+.day-card.full-done{border-color:var(--green-dim);background:var(--green-glow);}
+.day-card-header{display:flex;align-items:center;gap:10px;padding:11px 15px 8px;}
+.day-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--text-muted);min-width:28px;text-transform:uppercase;flex-shrink:0;}
+.day-text{font-size:13px;line-height:1.4;flex:1;}
+.day-pct{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);flex-shrink:0;}
+.day-activities{display:flex;flex-wrap:wrap;gap:6px;padding:0 15px 11px;}
+.act-pill{display:flex;align-items:center;gap:5px;padding:5px 9px;border-radius:20px;border:1px solid;cursor:pointer;user-select:none;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;}
+.act-pill:active{opacity:0.7;}
+.act-pill.unchecked{background:transparent;color:var(--text-muted);border-color:var(--border2);}
+.act-pill.run.checked{color:#fff;background:var(--blue);border-color:var(--blue);}
+.act-pill.strength.checked{color:#fff;background:#b83030;border-color:#b83030;}
+.act-pill.plyo.checked{color:#fff;background:var(--plyo);border-color:var(--plyo);}
+.act-pill.stairmaster.checked{color:#fff;background:var(--purple);border-color:var(--purple);}
+.act-pill.yoga.checked{color:#fff;background:var(--green);border-color:var(--green);}
+.act-pill.rest.checked{color:#fff;background:var(--text-muted);border-color:var(--text-muted);}
+.act-pill.race.checked{color:#fff;background:var(--amber);border-color:var(--amber);}
+.act-check{width:12px;height:12px;border-radius:3px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;}
+.act-pill.checked .act-check::after{content:'✓';}
 .info-cards{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
 .info-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 15px;}
 .info-card.amber-accent{border-left:3px solid var(--amber);}
@@ -164,7 +115,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .info-card-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:7px;}
 .info-card-body{font-size:13px;color:var(--text-dim);line-height:1.6;}
 
-/* ── STATS ── */
+/* STATS */
 .stats-pad{padding:18px 16px 32px;}
 .stats-hero{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px;display:flex;align-items:center;gap:18px;}
 .big-ring{position:relative;width:76px;height:76px;flex-shrink:0;}
@@ -186,7 +137,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .countdown-item:last-child{border-bottom:none;}
 .countdown-race{display:flex;align-items:center;gap:10px;}
 .race-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.race-dot.berlin{background:var(--red);}
+.race-dot.amsterdam{background:var(--red);}
 .race-dot.philly{background:var(--green);}
 .countdown-name{font-size:13px;font-weight:500;}
 .countdown-sub{font-size:11px;color:var(--text-muted);}
@@ -194,12 +145,12 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .countdown-days-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--text-muted);text-align:right;}
 .phase-breakdown{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;}
 .phase-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
-.phase-row-label{font-size:11px;color:var(--text-dim);min-width:65px;}
+.phase-row-label{font-size:11px;color:var(--text-dim);min-width:70px;}
 .phase-bar-wrap{flex:1;height:4px;background:var(--border2);border-radius:2px;overflow:hidden;}
 .phase-bar-fill{height:100%;border-radius:2px;}
 .phase-row-pct{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);min-width:28px;text-align:right;}
 
-/* ── PACING ── */
+/* PACING */
 .pacing-pad{padding:18px 16px 32px;}
 .pacing-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px;}
 .pacing-card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
@@ -216,7 +167,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .split-pace{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;min-width:65px;}
 .split-note{font-size:12px;color:var(--text-dim);line-height:1.4;}
 
-/* ── WORKOUT ── */
+/* WORKOUT */
 .workout-selectors{background:var(--bg);border-bottom:1px solid var(--border);padding:12px 16px 0;flex-shrink:0;}
 .week-select-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;}
 .workout-selector-row{display:flex;gap:6px;overflow-x:scroll;-webkit-overflow-scrolling:touch;padding-bottom:10px;}
@@ -243,8 +194,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .shb-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;}
 .shb-sub{font-size:11px;color:var(--text-muted);margin-top:2px;font-style:italic;}
 .empty-week{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:10px;}
-
-/* ── EXERCISE CARD ── */
 .ex-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;}
 .ex-header{display:flex;align-items:center;gap:12px;padding:13px 15px;cursor:pointer;user-select:none;}
 .ex-header:active{opacity:0.7;}
@@ -292,14 +241,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
       <div class="ring-text" id="overallPct">0%</div>
     </div>
   </div>
-
   <div id="viewPort">
-    <!-- SCHEDULE -->
-    <div id="weekListView" class="view active">
-      <div id="weekListContent" style="padding-bottom:24px"></div>
-    </div>
-
-    <!-- DETAIL -->
+    <div id="weekListView" class="view active"><div id="weekListContent" style="padding-bottom:24px"></div></div>
     <div id="weekDetailView" class="view">
       <div class="view-flex">
         <div class="detail-header" id="detailHeader"></div>
@@ -307,18 +250,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
         <div class="detail-scroll" id="detailScroll"></div>
       </div>
     </div>
-
-    <!-- STATS -->
-    <div id="statsView" class="view">
-      <div class="stats-pad" id="statsContent"></div>
-    </div>
-
-    <!-- PACING -->
-    <div id="pacingView" class="view">
-      <div class="pacing-pad" id="pacingContent"></div>
-    </div>
-
-    <!-- WORKOUT -->
+    <div id="statsView" class="view"><div class="stats-pad" id="statsContent"></div></div>
+    <div id="pacingView" class="view"><div class="pacing-pad" id="pacingContent"></div></div>
     <div id="workoutView" class="view">
       <div class="view-flex">
         <div class="workout-selectors">
@@ -326,13 +259,10 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
           <div class="workout-selector-row" id="weekScroller"></div>
           <div class="session-tabs" id="sessionTabs"></div>
         </div>
-        <div class="workout-scroll">
-          <div class="workout-content" id="workoutContent"></div>
-        </div>
+        <div class="workout-scroll"><div class="workout-content" id="workoutContent"></div></div>
       </div>
     </div>
   </div>
-
   <div id="bottomNav">
     <button class="nav-btn active" id="navWeeks" onclick="showView('weeks')"><span class="nav-icon">📅</span><span class="nav-label">Schedule</span></button>
     <button class="nav-btn" id="navStats" onclick="showView('stats')"><span class="nav-icon">📊</span><span class="nav-label">Progress</span></button>
@@ -340,82 +270,295 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <button class="nav-btn" id="navWorkout" onclick="showView('workout')"><span class="nav-icon">💪</span><span class="nav-label">Gym</span></button>
   </div>
 </div>
-
 <script>
+// ── ACTIVITY WEIGHTS ──────────────────────────────────────────────────────────
+const ACT_WEIGHTS={run:0.70,strength:0.15,plyo:0.07,stairmaster:0.05,yoga:0.03};
+const ACT_LABELS={run:'Run',strength:'Strength',plyo:'Plyo',stairmaster:'Stairs',yoga:'Yoga',rest:'Rest',race:'Race'};
+const ACT_ICONS={run:'🏃',strength:'💪',plyo:'🦘',stairmaster:'🪜',yoga:'🧘',rest:'😴',race:'🏁'};
+
+// ── SCHEDULE ──────────────────────────────────────────────────────────────────
+// activities: array of activity types present in that day
+// rest days get a base score of 0.95 when marked done
 const SCHEDULE=[
-  {wk:1,phase:"REBUILD",mi:18,days:[{id:"mon",label:"MON",text:"Easy 4 mi + Stairmaster 20 min",tags:["run","stairmaster"]},{id:"tue",label:"TUE",text:"Easy 4 mi",tags:["run"]},{id:"wed",label:"WED",text:"Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 5 mi + Strength",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Rest or walk 30 min",tags:["rest"]},{id:"sat",label:"SAT",text:"Easy 5 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",tags:["yoga"]}],notes:"All runs conversational easy pace (~8:30–9:00/mi). Zero intensity. Re-establish the routine."},
-  {wk:2,phase:"REBUILD",mi:22,days:[{id:"mon",label:"MON",text:"Easy 5 mi + Stairmaster 20 min",tags:["run","stairmaster"]},{id:"tue",label:"TUE",text:"Easy 5 mi",tags:["run"]},{id:"wed",label:"WED",text:"Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 6 mi + Strength",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Rest or walk 30 min",tags:["rest"]},{id:"sat",label:"SAT",text:"Easy 6 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",tags:["yoga"]}],notes:"Build the habit of back-to-back days. Keep heart rate genuinely low."},
-  {wk:3,phase:"REBUILD",mi:27,days:[{id:"mon",label:"MON",text:"Easy 5 mi + Stairmaster 25 min",tags:["run","stairmaster"]},{id:"tue",label:"TUE",text:"Easy 6 mi",tags:["run"]},{id:"wed",label:"WED",text:"Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 6 mi + Stairmaster 20 min + Strength",tags:["run","stairmaster","strength"]},{id:"fri",label:"FRI",text:"Easy 4 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long easy 8 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",tags:["yoga"]}],notes:"First week with a real long run. Keep it all easy."},
-  {wk:4,phase:"REBUILD",mi:30,days:[{id:"mon",label:"MON",text:"Easy 6 mi + Stairmaster 25 min + Strength A",tags:["run","stairmaster","strength"]},{id:"tue",label:"TUE",text:"Easy 6 mi",tags:["run"]},{id:"wed",label:"WED",text:"Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 7 mi + Strength B + Intro Plyo",tags:["run","strength","plyo"]},{id:"fri",label:"FRI",text:"Easy 4 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long easy 10 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min + walk 25 min",tags:["yoga"]}],notes:"First plyo work Thursday after strength. Landing mechanics only. 2x/week strength begins."},
-  {wk:5,phase:"REBUILD",mi:24,days:[{id:"mon",label:"MON",text:"Easy 5 mi + Stairmaster 20 min + Strength A",tags:["run","stairmaster","strength"]},{id:"tue",label:"TUE",text:"Easy 5 mi",tags:["run"]},{id:"wed",label:"WED",text:"Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 5 mi + Strength B (cutback, no plyo)",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Rest",tags:["rest"]},{id:"sat",label:"SAT",text:"Easy 9 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",tags:["yoga"]}],notes:"Cutback week. Let your body absorb the load."},
-  {wk:6,phase:"REBUILD",mi:36,days:[{id:"mon",label:"MON",text:"Easy 7 mi + Stairmaster 30 min + Strength A",tags:["run","stairmaster","strength"]},{id:"tue",label:"TUE",text:"Easy 7 mi",tags:["run"]},{id:"wed",label:"WED",text:"Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 7 mi + Strength B + Plyo",tags:["run","strength","plyo"]},{id:"fri",label:"FRI",text:"Easy 5 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long easy 12 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",tags:["yoga"]}],notes:"End of Phase 1. 2x/week strength now standard. Plyo resumes Thursday after Strength B."},
-  {wk:7,phase:"BASE",mi:40,days:[{id:"mon",label:"MON",text:"Easy 8 mi + Stairmaster 25 min + Strength A",tags:["run","stairmaster","strength"]},{id:"tue",label:"TUE",text:"Easy 7 mi + 6×100m strides",tags:["run","quality"]},{id:"wed",label:"WED",text:"Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 8 mi + Strength B + Plyo",tags:["run","strength","plyo"]},{id:"fri",label:"FRI",text:"Easy 5 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long easy 14 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min",tags:["yoga"]}],notes:"Strides begin: 6×100m at 5K effort. Box jumps and bounding start Thursday after Strength B."},
-  {wk:8,phase:"BASE",mi:44,days:[{id:"mon",label:"MON",text:"Easy 8 mi + Stairmaster 25 min + Strength A",tags:["run","stairmaster","strength"]},{id:"tue",label:"TUE",text:"Easy 7 mi + 6×100m strides",tags:["run","quality"]},{id:"wed",label:"WED",text:"Yoga 60 min + Stairmaster 20 min",tags:["yoga","stairmaster"]},{id:"thu",label:"THU",text:"Easy 9 mi + 4×100m strides + Strength B + Plyo",tags:["run","quality","strength","plyo"]},{id:"fri",label:"FRI",text:"Easy 5 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long easy 16 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min",tags:["yoga"]}],notes:"First 16-miler. Pace should feel comfortable at mile 15."},
-  {wk:9,phase:"BASE",mi:48,days:[{id:"mon",label:"MON",text:"Easy 8 mi + Stairmaster 25 min + Strength A",tags:["run","stairmaster","strength"]},{id:"tue",label:"TUE",text:"Easy 8 mi + M-pace last 3 mi + 4×100m strides",tags:["run","quality"]},{id:"wed",label:"WED",text:"Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 9 mi + Strength B + Plyo",tags:["run","strength","plyo"]},{id:"fri",label:"FRI",text:"Easy 5 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long 18 mi (last 4 at M-pace ~7:15–7:20/mi)",tags:["run","quality"]},{id:"sun",label:"SUN",text:"Yoga 45 min + easy 4 mi recovery",tags:["yoga","run"]}],notes:"First marathon-pace work. Single-leg hops begin Thursday plyo."},
-  {wk:10,phase:"BASE",mi:38,days:[{id:"mon",label:"MON",text:"Easy 6 mi + Stairmaster 20 min + Strength A",tags:["run","stairmaster","strength"]},{id:"tue",label:"TUE",text:"Easy 7 mi + 4×100m strides",tags:["run","quality"]},{id:"wed",label:"WED",text:"Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 6 mi + Strength B + Light Plyo",tags:["run","strength","plyo"]},{id:"fri",label:"FRI",text:"Easy 4 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Easy 13 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min",tags:["yoga"]}],notes:"Cutback week. Prioritize sleep and nutrition quality."},
-  {wk:11,phase:"QUALITY",mi:50,days:[{id:"mon",label:"MON",text:"Easy 8 mi + Strength A + Plyo (standalone)",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Quality: 4×1-mile T-pace (6:45–6:50/mi) w/ 90s jog",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 6 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 10 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 5 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long 18 mi (last 5 at M-pace)",tags:["run","quality"]},{id:"sun",label:"SUN",text:"Yoga 45 min + easy 5 mi recovery",tags:["yoga","run"]}],notes:"Threshold work begins. Plyo moves to Monday after Strength A."},
-  {wk:12,phase:"QUALITY",mi:53,days:[{id:"mon",label:"MON",text:"Easy 9 mi + Strength A + Plyo (standalone)",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Quality: 2×3-mile T-pace w/ 3 min jog recovery",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 6 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 10 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 5 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long 20 mi (last 6 at M-pace)",tags:["run","quality"]},{id:"sun",label:"SUN",text:"Yoga 45 min + easy 5 mi recovery",tags:["yoga","run"]}],notes:"First 20-miler. Depth drops introduced in Monday plyo."},
-  {wk:13,phase:"QUALITY",mi:50,days:[{id:"mon",label:"MON",text:"Easy 8 mi + Strength A + Light Plyo",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Quality: 5×1-mile T-pace w/ 90s recovery",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 6 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 10 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 4 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long 18 mi (steady, no pace work)",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min + easy 4 mi recovery",tags:["yoga","run"]}],notes:"Recovery week embedded. Long run easy. Box jumps only for plyo."},
-  {wk:14,phase:"QUALITY",mi:57,days:[{id:"mon",label:"MON",text:"Easy 9 mi + Strength A + Plyo (standalone)",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Quality: 3×2-mile T-pace w/ 2 min jog recovery",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 7 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 11 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 5 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long 20 mi (last 8 at M-pace)",tags:["run","quality"]},{id:"sun",label:"SUN",text:"Yoga 45 min + easy 5 mi recovery",tags:["yoga","run"]}],notes:"Hardest long run of the cycle. Reactive depth drop → box jump begins in Monday plyo."},
-  {wk:15,phase:"QUALITY",mi:60,days:[{id:"mon",label:"MON",text:"Easy 10 mi + Strength A + Plyo (peak session)",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Quality: 6×1-mile T-pace w/ 90s recovery",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 7 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 11 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 5 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long 22 mi (last 6 at M-pace)",tags:["run","quality"]},{id:"sun",label:"SUN",text:"Yoga 45 min + easy 7 mi recovery",tags:["yoga","run"]}],notes:"Peak long run AND peak plyo. Trust the training."},
-  {wk:16,phase:"QUALITY",mi:46,days:[{id:"mon",label:"MON",text:"Easy 8 mi + Strength A + Light Plyo",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Quality: 4×1-mile T-pace w/ 90s recovery",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 5 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 9 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 4 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Easy 14 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min",tags:["yoga"]}],notes:"Pre-Berlin cutback. Light plyo Monday only."},
-  {wk:17,phase:"BERLIN",mi:55,days:[{id:"mon",label:"MON",text:"Easy 6 mi",tags:["run"]},{id:"tue",label:"TUE",text:"Easy 5 mi + 4×100m strides",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 4 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 4 mi + 2×100m strides",tags:["run","quality"]},{id:"fri",label:"FRI",text:"Easy 2 mi shakeout + strides",tags:["run"]},{id:"sat",label:"SAT",text:"REST / travel to Berlin",tags:["rest"]},{id:"sun",label:"SUN",text:"🇩🇪 BERLIN MARATHON — 3:20–3:25 effort. Do not race.",tags:["race"]}],notes:"BERLIN RACE WEEK. Commit to 7:40–7:50/mi no matter how good you feel at mile 18."},
-  {wk:18,phase:"RECOVERY",mi:28,days:[{id:"mon",label:"MON",text:"Walk 30 min only",tags:["rest"]},{id:"tue",label:"TUE",text:"Easy 4 mi if legs feel OK, otherwise walk",tags:["run"]},{id:"wed",label:"WED",text:"Gentle Yoga 60 min",tags:["yoga"]},{id:"thu",label:"THU",text:"Easy 5 mi",tags:["run"]},{id:"fri",label:"FRI",text:"Walk 30 min",tags:["rest"]},{id:"sat",label:"SAT",text:"Easy 8 mi",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min",tags:["yoga"]}],notes:"Full Berlin recovery. Protein and anti-inflammatory food priority."},
-  {wk:19,phase:"RECOVERY",mi:42,days:[{id:"mon",label:"MON",text:"Easy 8 mi + Strength A + Light Plyo return",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Easy 7 mi + 4×100m strides",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 5 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 8 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 4 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long 16 mi (steady, no pace work)",tags:["run"]},{id:"sun",label:"SUN",text:"Yoga 45 min",tags:["yoga"]}],notes:"Back to 2x/week strength. Gentle plyo return Monday."},
-  {wk:20,phase:"QUALITY",mi:50,days:[{id:"mon",label:"MON",text:"Easy 9 mi + Strength A + Plyo",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Quality: 3×2-mile T-pace w/ 2 min recovery",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 6 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 10 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 4 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Long 18 mi (last 6 at M-pace)",tags:["run","quality"]},{id:"sun",label:"SUN",text:"Yoga 45 min",tags:["yoga"]}],notes:"Last full training block. Last real plyo session Monday."},
-  {wk:21,phase:"TAPER",mi:38,days:[{id:"mon",label:"MON",text:"Easy 7 mi + Strength A + Light Plyo",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Quality: 4×1-mile T-pace w/ 90s recovery",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 5 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 7 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 4 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Easy 14 mi (last 3 at M-pace)",tags:["run","quality"]},{id:"sun",label:"SUN",text:"Yoga 45 min",tags:["yoga"]}],notes:"Taper begins. Minimal plyo Monday — 2×6 box jumps only."},
-  {wk:22,phase:"TAPER",mi:30,days:[{id:"mon",label:"MON",text:"Easy 6 mi + Strength A + Minimal Plyo",tags:["run","strength","plyo"]},{id:"tue",label:"TUE",text:"Quality: 3×1-mile T-pace + 4×100m strides",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 4 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 6 mi + Strength B",tags:["run","strength"]},{id:"fri",label:"FRI",text:"Easy 3 mi",tags:["run"]},{id:"sat",label:"SAT",text:"Easy 10 mi (last 2 at M-pace)",tags:["run","quality"]},{id:"sun",label:"SUN",text:"Yoga 45 min",tags:["yoga"]}],notes:"2×4 box jumps Monday. The urge to run more will feel strong — resist."},
-  {wk:23,phase:"TAPER",mi:20,days:[{id:"mon",label:"MON",text:"Easy 5 mi",tags:["run"]},{id:"tue",label:"TUE",text:"Easy 4 mi + 4×100m strides",tags:["run","quality"]},{id:"wed",label:"WED",text:"Easy 3 mi + Yoga 60 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 4 mi + 2×100m strides",tags:["run","quality"]},{id:"fri",label:"FRI",text:"Easy 2 mi shakeout",tags:["run"]},{id:"sat",label:"SAT",text:"REST",tags:["rest"]},{id:"sun",label:"SUN",text:"Gentle Yoga 30 min",tags:["yoga"]}],notes:"Race week incoming. Carb load from Wednesday. Hydrate. Sleep."},
-  {wk:24,phase:"RACE",mi:26,days:[{id:"mon",label:"MON",text:"Easy 3 mi + 2× strides",tags:["run"]},{id:"tue",label:"TUE",text:"Easy 2 mi + 2× strides",tags:["run"]},{id:"wed",label:"WED",text:"Easy 2 mi or rest + Yoga 30 min",tags:["run","yoga"]},{id:"thu",label:"THU",text:"Easy 2 mi",tags:["run"]},{id:"fri",label:"FRI",text:"Shakeout 1–2 mi + strides",tags:["run"]},{id:"sat",label:"SAT",text:"REST — prep gear, eat well, sleep by 9pm",tags:["rest"]},{id:"sun",label:"SUN",text:"🏁 PHILADELPHIA MARATHON — Sub-3:10. Start 7:20/mi. Trust the build.",tags:["race"]}],notes:"RACE WEEK. Patient through mile 18. Empty the tank in the final 3.2."},
+  // ── WEEKS 1–6 UNCHANGED (except activities field added) ──
+  {wk:1,phase:"REBUILD",mi:18,days:[
+    {id:"mon",label:"MON",text:"Easy 4 mi + Stairmaster 20 min",activities:["run","stairmaster"]},
+    {id:"tue",label:"TUE",text:"Easy 4 mi",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 5 mi + Strength",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Rest or walk 30 min",activities:["rest"]},
+    {id:"sat",label:"SAT",text:"Easy 5 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+  ],notes:"All runs conversational easy pace (~8:30–9:00/mi). Zero intensity. Re-establish the routine."},
+  {wk:2,phase:"REBUILD",mi:22,days:[
+    {id:"mon",label:"MON",text:"Easy 5 mi + Stairmaster 20 min",activities:["run","stairmaster"]},
+    {id:"tue",label:"TUE",text:"Easy 5 mi",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 6 mi + Strength",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Rest or walk 30 min",activities:["rest"]},
+    {id:"sat",label:"SAT",text:"Easy 6 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+  ],notes:"Build the habit of back-to-back days. Keep heart rate genuinely low."},
+  {wk:3,phase:"REBUILD",mi:27,days:[
+    {id:"mon",label:"MON",text:"Easy 5 mi + Stairmaster 25 min",activities:["run","stairmaster"]},
+    {id:"tue",label:"TUE",text:"Easy 6 mi",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 6 mi + Stairmaster 20 min + Strength",activities:["run","stairmaster","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long easy 8 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+  ],notes:"First week with a real long run. Keep it all easy."},
+  {wk:4,phase:"REBUILD",mi:30,days:[
+    {id:"mon",label:"MON",text:"Easy 6 mi + Stairmaster 25 min + Strength A",activities:["run","stairmaster","strength"]},
+    {id:"tue",label:"TUE",text:"Easy 6 mi",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 7 mi + Strength B + Intro Plyo",activities:["run","strength","plyo"]},
+    {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long easy 10 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 25 min",activities:["yoga"]},
+  ],notes:"First plyo work Thursday after strength. Landing mechanics only. 2x/week strength begins."},
+  {wk:5,phase:"REBUILD",mi:24,days:[
+    {id:"mon",label:"MON",text:"Easy 5 mi + Stairmaster 20 min + Strength A",activities:["run","stairmaster","strength"]},
+    {id:"tue",label:"TUE",text:"Easy 5 mi",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 5 mi + Strength B (cutback, no plyo)",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Rest",activities:["rest"]},
+    {id:"sat",label:"SAT",text:"Easy 9 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+  ],notes:"Cutback week. Let your body absorb the load."},
+  {wk:6,phase:"REBUILD",mi:36,days:[
+    {id:"mon",label:"MON",text:"Easy 7 mi + Stairmaster 30 min + Strength A",activities:["run","stairmaster","strength"]},
+    {id:"tue",label:"TUE",text:"Easy 7 mi",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 7 mi + Strength B + Plyo",activities:["run","strength","plyo"]},
+    {id:"fri",label:"FRI",text:"Easy 5 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long easy 12 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+  ],notes:"End of Phase 1. 2x/week strength now standard. Plyo resumes Thursday after Strength B."},
+
+  // ── WEEKS 7–16: BASE + QUALITY toward Amsterdam ──
+  {wk:7,phase:"BASE",mi:40,days:[
+    {id:"mon",label:"MON",text:"Easy 8 mi + Stairmaster 25 min + Strength A",activities:["run","stairmaster","strength"]},
+    {id:"tue",label:"TUE",text:"Easy 7 mi + 6×100m strides",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 8 mi + Strength B + Plyo",activities:["run","strength","plyo"]},
+    {id:"fri",label:"FRI",text:"Easy 5 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long easy 14 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
+  ],notes:"Strides begin: 6×100m at 5K effort. Box jumps and bounding start Thursday after Strength B."},
+  {wk:8,phase:"BASE",mi:44,days:[
+    {id:"mon",label:"MON",text:"Easy 8 mi + Stairmaster 25 min + Strength A",activities:["run","stairmaster","strength"]},
+    {id:"tue",label:"TUE",text:"Easy 7 mi + 6×100m strides",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min + Stairmaster 20 min",activities:["yoga","stairmaster"]},
+    {id:"thu",label:"THU",text:"Easy 9 mi + 4×100m strides + Strength B + Plyo",activities:["run","strength","plyo"]},
+    {id:"fri",label:"FRI",text:"Easy 5 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long easy 16 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
+  ],notes:"First 16-miler. Pace should feel comfortable at mile 15."},
+  {wk:9,phase:"BASE",mi:48,days:[
+    {id:"mon",label:"MON",text:"Easy 8 mi + Stairmaster 25 min + Strength A",activities:["run","stairmaster","strength"]},
+    {id:"tue",label:"TUE",text:"Easy 8 mi + M-pace last 3 mi + 4×100m strides",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 9 mi + Strength B + Plyo",activities:["run","strength","plyo"]},
+    {id:"fri",label:"FRI",text:"Easy 5 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long 18 mi (last 4 at M-pace ~7:15–7:20/mi)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + easy 4 mi recovery",activities:["yoga","run"]},
+  ],notes:"First marathon-pace work. Single-leg hops begin Thursday plyo."},
+  {wk:10,phase:"BASE",mi:38,days:[
+    {id:"mon",label:"MON",text:"Easy 6 mi + Stairmaster 20 min + Strength A",activities:["run","stairmaster","strength"]},
+    {id:"tue",label:"TUE",text:"Easy 7 mi + 4×100m strides",activities:["run"]},
+    {id:"wed",label:"WED",text:"Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 6 mi + Strength B + Light Plyo",activities:["run","strength","plyo"]},
+    {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Easy 13 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
+  ],notes:"Cutback week. Prioritize sleep and nutrition quality."},
+  {wk:11,phase:"QUALITY",mi:50,days:[
+    {id:"mon",label:"MON",text:"Easy 8 mi + Strength A + Plyo",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Quality: 4×1-mile T-pace (6:45–6:50/mi) w/ 90s jog",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 6 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 10 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 5 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long 18 mi (last 5 at M-pace)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + easy 5 mi recovery",activities:["yoga","run"]},
+  ],notes:"Threshold work begins. Plyo moves to Monday after Strength A."},
+  {wk:12,phase:"QUALITY",mi:53,days:[
+    {id:"mon",label:"MON",text:"Easy 9 mi + Strength A + Plyo",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Quality: 2×3-mile T-pace w/ 3 min jog recovery",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 6 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 10 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 5 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long 20 mi (last 6 at M-pace)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + easy 5 mi recovery",activities:["yoga","run"]},
+  ],notes:"First 20-miler. Depth drops introduced in Monday plyo."},
+  {wk:13,phase:"QUALITY",mi:50,days:[
+    {id:"mon",label:"MON",text:"Easy 8 mi + Strength A + Light Plyo",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Quality: 5×1-mile T-pace w/ 90s recovery",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 6 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 10 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long 18 mi (steady)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + easy 4 mi recovery",activities:["yoga","run"]},
+  ],notes:"Recovery week embedded. Long run easy. Box jumps only for plyo."},
+  {wk:14,phase:"QUALITY",mi:57,days:[
+    {id:"mon",label:"MON",text:"Easy 9 mi + Strength A + Plyo",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Quality: 3×2-mile T-pace w/ 2 min jog recovery",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 7 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 11 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 5 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long 20 mi (last 8 at M-pace)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + easy 5 mi recovery",activities:["yoga","run"]},
+  ],notes:"Hardest long run of the cycle. Reactive depth drop → box jump begins Monday plyo."},
+  {wk:15,phase:"QUALITY",mi:60,days:[
+    {id:"mon",label:"MON",text:"Easy 10 mi + Strength A + Plyo (peak)",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Quality: 6×1-mile T-pace w/ 90s recovery",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 7 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 11 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 5 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long 22 mi (last 6 at M-pace)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + easy 7 mi recovery",activities:["yoga","run"]},
+  ],notes:"Peak long run AND peak plyo. Trust the training."},
+  {wk:16,phase:"QUALITY",mi:46,days:[
+    {id:"mon",label:"MON",text:"Easy 8 mi + Strength A + Light Plyo",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Quality: 4×1-mile T-pace w/ 90s recovery",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 5 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 9 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Easy 14 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
+  ],notes:"Pre-Amsterdam cutback. Light plyo Monday only."},
+
+  // ── WEEK 17: AMSTERDAM TAPER / RACE WEEK ──
+  {wk:17,phase:"AMSTERDAM",mi:26,days:[
+    {id:"mon",label:"MON",text:"Easy 6 mi",activities:["run"]},
+    {id:"tue",label:"TUE",text:"Easy 5 mi + 4×100m strides",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 4 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 4 mi + 2×100m strides",activities:["run"]},
+    {id:"fri",label:"FRI",text:"Easy 2 mi shakeout + strides",activities:["run"]},
+    {id:"sat",label:"SAT",text:"REST — travel / prep",activities:["rest"]},
+    {id:"sun",label:"SUN",text:"🇳🇱 AMSTERDAM MARATHON — 3:20–3:25 effort. Do not race.",activities:["race"]},
+  ],notes:"AMSTERDAM RACE WEEK. B race — commit to 7:40–7:50/mi. Hold pace no matter how good you feel at mile 18."},
+
+  // ── WEEK 18: RECOVERY ──
+  {wk:18,phase:"RECOVERY",mi:28,days:[
+    {id:"mon",label:"MON",text:"Walk 30 min only",activities:["rest"]},
+    {id:"tue",label:"TUE",text:"Easy 4 mi if legs feel OK, otherwise walk",activities:["run"]},
+    {id:"wed",label:"WED",text:"Gentle Yoga 60 min",activities:["yoga"]},
+    {id:"thu",label:"THU",text:"Easy 5 mi",activities:["run"]},
+    {id:"fri",label:"FRI",text:"Walk 30 min",activities:["rest"]},
+    {id:"sat",label:"SAT",text:"Easy 8 mi",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
+  ],notes:"Full Amsterdam recovery. Protein and anti-inflammatory food priority."},
+
+  // ── WEEKS 19–20: POST-AMSTERDAM REBUILD ──
+  {wk:19,phase:"RECOVERY",mi:42,days:[
+    {id:"mon",label:"MON",text:"Easy 8 mi + Strength A + Light Plyo return",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Easy 7 mi + 4×100m strides",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 5 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 8 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long 16 mi (steady)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
+  ],notes:"Back to 2x/week strength. Gentle plyo return Monday."},
+  {wk:20,phase:"QUALITY",mi:50,days:[
+    {id:"mon",label:"MON",text:"Easy 9 mi + Strength A + Plyo",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Quality: 3×2-mile T-pace w/ 2 min recovery",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 6 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 10 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Long 18 mi (last 6 at M-pace)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
+  ],notes:"Last full training block before Philly taper."},
+
+  // ── WEEKS 21–23: PHILLY TAPER ──
+  {wk:21,phase:"TAPER",mi:38,days:[
+    {id:"mon",label:"MON",text:"Easy 7 mi + Strength A + Light Plyo",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Quality: 4×1-mile T-pace w/ 90s recovery",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 5 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 7 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Easy 14 mi (last 3 at M-pace)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
+  ],notes:"Taper begins. Minimal plyo Monday — 2×6 box jumps only."},
+  {wk:22,phase:"TAPER",mi:30,days:[
+    {id:"mon",label:"MON",text:"Easy 6 mi + Strength A + Minimal Plyo",activities:["run","strength","plyo"]},
+    {id:"tue",label:"TUE",text:"Quality: 3×1-mile T-pace + 4×100m strides",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 4 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 6 mi + Strength B",activities:["run","strength"]},
+    {id:"fri",label:"FRI",text:"Easy 3 mi",activities:["run"]},
+    {id:"sat",label:"SAT",text:"Easy 10 mi (last 2 at M-pace)",activities:["run"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
+  ],notes:"2×4 box jumps Monday. The urge to run more will feel strong — resist."},
+  {wk:23,phase:"TAPER",mi:20,days:[
+    {id:"mon",label:"MON",text:"Easy 5 mi",activities:["run"]},
+    {id:"tue",label:"TUE",text:"Easy 4 mi + 4×100m strides",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 3 mi + Yoga 60 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 4 mi + 2×100m strides",activities:["run"]},
+    {id:"fri",label:"FRI",text:"Easy 2 mi shakeout",activities:["run"]},
+    {id:"sat",label:"SAT",text:"REST",activities:["rest"]},
+    {id:"sun",label:"SUN",text:"Gentle Yoga 30 min",activities:["yoga"]},
+  ],notes:"Race week incoming. Carb load from Wednesday. Hydrate. Sleep."},
+
+  // ── WEEK 24: PHILLY RACE WEEK ──
+  {wk:24,phase:"RACE",mi:26,days:[
+    {id:"mon",label:"MON",text:"Easy 3 mi + 2× strides",activities:["run"]},
+    {id:"tue",label:"TUE",text:"Easy 2 mi + 2× strides",activities:["run"]},
+    {id:"wed",label:"WED",text:"Easy 2 mi or rest + Yoga 30 min",activities:["run","yoga"]},
+    {id:"thu",label:"THU",text:"Easy 2 mi",activities:["run"]},
+    {id:"fri",label:"FRI",text:"Shakeout 1–2 mi + strides",activities:["run"]},
+    {id:"sat",label:"SAT",text:"REST — prep gear, eat well, sleep by 9pm",activities:["rest"]},
+    {id:"sun",label:"SUN",text:"🏁 PHILADELPHIA MARATHON — Sub-3:10. Start 7:20/mi. Trust the build.",activities:["race"]},
+  ],notes:"RACE WEEK. Patient through mile 18. Empty the tank in the final 3.2."},
 ];
 
+// ── GYM WORKOUTS (weeks 1–6 unchanged, 7–24 updated for Amsterdam/Philly) ──
 const WORKOUTS={
-  1:{phase:"REBUILD",sessions:{thu:{label:"Session A",day:"Thursday",strength:[{id:"clamshell",name:"Clamshells (banded)",sets:3,reps:"15 each",weight:false,notes:"Glute med activation. Keep hips stacked."},{id:"hip_abduction",name:"Side-lying Hip Abduction",sets:3,reps:"15 each",weight:false,notes:"Keep leg straight. Slow and controlled."},{id:"glute_bridge",name:"Single-Leg Glute Bridge",sets:3,reps:"12 each",weight:false,notes:"Drive through heel."},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:12,weight:true,notes:"Hinge from hips, slight knee bend."},{id:"goblet_squat",name:"Goblet Squat",sets:3,reps:12,weight:true,notes:"Heels slightly elevated if needed. Deep range."},{id:"calf_raise",name:"Calf Raises (standing)",sets:4,reps:15,weight:true,notes:"Full range, slow lower."},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:"Lower back stays flat."},{id:"step_down",name:"Step-Down (off box)",sets:3,reps:"12 each",weight:false,notes:"Slow eccentric."}],plyo:[]}}},
-  2:{phase:"REBUILD",sessions:{thu:{label:"Session A",day:"Thursday",strength:[{id:"clamshell",name:"Clamshells (banded)",sets:3,reps:"15 each",weight:false,notes:""},{id:"lateral_walk",name:"Banded Lateral Walks",sets:3,reps:"20 steps each",weight:false,notes:"Band above knees. Stay low."},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"20 sec each",weight:false,notes:"Build toward 45 sec."},{id:"glute_bridge",name:"Single-Leg Glute Bridge",sets:3,reps:"12 each",weight:false,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:12,weight:true,notes:""},{id:"goblet_squat",name:"Goblet Squat",sets:3,reps:12,weight:true,notes:""},{id:"calf_raise",name:"Calf Raises (standing)",sets:4,reps:15,weight:true,notes:""},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:""}],plyo:[]}}},
-  3:{phase:"REBUILD",sessions:{thu:{label:"Session A",day:"Thursday",strength:[{id:"lateral_walk",name:"Banded Lateral Walks",sets:3,reps:"20 steps each",weight:false,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"25 sec each",weight:false,notes:""},{id:"sl_glute_bridge",name:"Single-Leg Glute Bridge",sets:3,reps:"12 each",weight:false,notes:""},{id:"step_up",name:"Lateral Step-Up",sets:3,reps:"12 each",weight:true,notes:"Drive through heel."},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:12,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[]}}},
+  1:{phase:"REBUILD",sessions:{thu:{label:"Session A",day:"Thursday",strength:[{id:"clamshell",name:"Clamshells (banded)",sets:3,reps:"15 each",weight:false,notes:"Glute med activation."},{id:"hip_abduction",name:"Side-lying Hip Abduction",sets:3,reps:"15 each",weight:false,notes:"Slow and controlled."},{id:"glute_bridge",name:"Single-Leg Glute Bridge",sets:3,reps:"12 each",weight:false,notes:"Drive through heel."},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:12,weight:true,notes:"Hinge from hips."},{id:"goblet_squat",name:"Goblet Squat",sets:3,reps:12,weight:true,notes:"Deep range."},{id:"calf_raise",name:"Calf Raises (standing)",sets:4,reps:15,weight:true,notes:"Full range, slow lower."},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:"Lower back stays flat."},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:"Slow eccentric."}],plyo:[]}}},
+  2:{phase:"REBUILD",sessions:{thu:{label:"Session A",day:"Thursday",strength:[{id:"clamshell",name:"Clamshells (banded)",sets:3,reps:"15 each",weight:false,notes:""},{id:"lateral_walk",name:"Banded Lateral Walks",sets:3,reps:"20 steps each",weight:false,notes:"Band above knees."},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"20 sec each",weight:false,notes:""},{id:"glute_bridge",name:"Single-Leg Glute Bridge",sets:3,reps:"12 each",weight:false,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:12,weight:true,notes:""},{id:"goblet_squat",name:"Goblet Squat",sets:3,reps:12,weight:true,notes:""},{id:"calf_raise",name:"Calf Raises (standing)",sets:4,reps:15,weight:true,notes:""},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:""}],plyo:[]}}},
+  3:{phase:"REBUILD",sessions:{thu:{label:"Session A",day:"Thursday",strength:[{id:"lateral_walk",name:"Banded Lateral Walks",sets:3,reps:"20 steps each",weight:false,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"25 sec each",weight:false,notes:""},{id:"sl_glute_bridge",name:"Single-Leg Glute Bridge",sets:3,reps:"12 each",weight:false,notes:""},{id:"step_up",name:"Lateral Step-Up",sets:3,reps:"12 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:12,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[]}}},
   4:{phase:"REBUILD",sessions:{
-    mon:{label:"Session A",day:"Monday",strength:[{id:"clamshell",name:"Clamshells (banded)",sets:3,reps:"15 each",weight:false,notes:""},{id:"lateral_walk",name:"Banded Lateral Walks",sets:3,reps:"20 steps each",weight:false,notes:""},{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"10 each",weight:true,notes:"Rear foot elevated. Go deep."},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:12,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:12,weight:true,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[]},
-    thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust",sets:4,reps:12,weight:true,notes:"Drive through heels."},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"10 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"30 sec each",weight:false,notes:""},{id:"goblet_squat",name:"Goblet Squat",sets:3,reps:12,weight:true,notes:""},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[{id:"calf_hops",name:"Double-Leg Calf Hops",sets:2,reps:10,notes:"Continuous small hops. Minimal knee bend."},{id:"squat_jump",name:"Squat Jumps (bodyweight)",sets:2,reps:8,notes:"Land softly. No valgus collapse."}],plyoNote:"First plyo — focus on landing mechanics."}}},
+    mon:{label:"Session A",day:"Monday",strength:[{id:"clamshell",name:"Clamshells (banded)",sets:3,reps:"15 each",weight:false,notes:""},{id:"lateral_walk",name:"Banded Lateral Walks",sets:3,reps:"20 steps each",weight:false,notes:""},{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"10 each",weight:true,notes:"Rear foot elevated."},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:12,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:12,weight:true,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[]},
+    thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust",sets:4,reps:12,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"10 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"30 sec each",weight:false,notes:""},{id:"goblet_squat",name:"Goblet Squat",sets:3,reps:12,weight:true,notes:""},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[{id:"calf_hops",name:"Double-Leg Calf Hops",sets:2,reps:10,notes:"Minimal knee bend."},{id:"squat_jump",name:"Squat Jumps",sets:2,reps:8,notes:"Land softly. No valgus collapse."}],plyoNote:"First plyo — landing mechanics only."}}},
   5:{phase:"REBUILD — CUTBACK",sessions:{
     mon:{label:"Session A (cutback)",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:2,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:2,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:2,reps:12,weight:true,notes:""},{id:"dead_bug",name:"Dead Bug",sets:2,reps:"8 each",weight:false,notes:""}],plyo:[]},
     thu:{label:"Session B (cutback)",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust",sets:3,reps:10,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:2,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:2,reps:"30 sec each",weight:false,notes:""},{id:"step_down",name:"Step-Down",sets:2,reps:"12 each",weight:false,notes:""}],plyo:[],plyoNote:"Skip plyo this cutback week."}}},
   6:{phase:"REBUILD",sessions:{
     mon:{label:"Session A",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:4,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:12,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[]},
-    thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust",sets:4,reps:10,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"10 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"30 sec each",weight:false,notes:""},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[{id:"squat_jump",name:"Squat Jumps",sets:2,reps:10,notes:"Landing mechanics — knees over toes."},{id:"broad_jump",name:"Broad Jumps",sets:2,reps:8,notes:"Land, reset, repeat."}],plyoNote:"After Session B Thursday."}}},
+    thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust",sets:4,reps:10,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"10 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"30 sec each",weight:false,notes:""},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[{id:"squat_jump",name:"Squat Jumps",sets:2,reps:10,notes:"Landing mechanics."},{id:"broad_jump",name:"Broad Jumps",sets:2,reps:8,notes:"Land, reset, repeat."}],plyoNote:"After Session B Thursday."}}},
   7:{phase:"BASE",sessions:{
     mon:{label:"Session A",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:4,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[]},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:4,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:4,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"35 sec each",weight:false,notes:""},{id:"step_down",name:"Step-Down",sets:3,reps:"12 each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (18")',sets:3,reps:8,notes:'Step down — never jump down.'},{id:"bounding",name:"Bounding",sets:3,reps:"20m",notes:"Drive knee. Full recovery between sets."}],plyoNote:"Plyo after Session B Thursday."}}},
   8:{phase:"BASE",sessions:{
     mon:{label:"Session A",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:4,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:4,reps:10,weight:true,notes:""},{id:"goblet_squat",name:"Goblet Squat",sets:3,reps:12,weight:true,notes:"Hip mobility."},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""}],plyo:[]},
-    thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:4,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:4,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"40 sec each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (18–20")',sets:3,reps:8,notes:""},{id:"bounding",name:"Bounding",sets:3,reps:"30m",notes:""},{id:"lateral_hop",name:"Lateral Hops",sets:2,reps:"10 each",notes:"Hop over line. Land and stabilize. Targets glute med."}],plyoNote:"Lateral hops target your glute med weakness."}}},
+    thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:4,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:4,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"40 sec each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (18–20")',sets:3,reps:8,notes:""},{id:"bounding",name:"Bounding",sets:3,reps:"30m",notes:""},{id:"lateral_hop",name:"Lateral Hops",sets:2,reps:"10 each",notes:"Targets glute med."}],plyoNote:"Lateral hops target glute med weakness."}}},
   9:{phase:"BASE",sessions:{
     mon:{label:"Session A",day:"Monday",strength:[{id:"deadlift",name:"Deadlift",sets:4,reps:5,weight:true,notes:"Keep back flat."},{id:"split_squat",name:"Bulgarian Split Squat",sets:4,reps:"6 each",weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""}],plyo:[]},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:4,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:4,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"40 sec each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (20")',sets:3,reps:8,notes:""},{id:"bounding",name:"Bounding",sets:3,reps:"30m",notes:""},{id:"sl_hop",name:"Single-Leg Hops",sets:2,reps:"8 each",notes:"If unstable, go back to bilateral."}],plyoNote:"Single-leg hops. Skip if landing feels unstable."}}},
   10:{phase:"BASE — CUTBACK",sessions:{
     mon:{label:"Session A (cutback)",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"6 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:8,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[]},
-    thu:{label:"Session B (cutback)",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:3,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:2,reps:"40 sec each",weight:false,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (20")',sets:2,reps:6,notes:"Cutback — quality only."}],plyoNote:"Cutback — 2 sets box jumps only."}}},
+    thu:{label:"Session B (cutback)",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:3,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:2,reps:"40 sec each",weight:false,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (20")',sets:2,reps:6,notes:"Quality only."}],plyoNote:"Cutback — 2 sets box jumps only."}}},
   11:{phase:"QUALITY",sessions:{
-    mon:{label:"Session A + Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:4,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (20–22")',sets:3,reps:8,notes:""},{id:"bounding",name:"Bounding",sets:3,reps:"30m",notes:"Short ground contact time."},{id:"lateral_hop",name:"Lateral Bounds",sets:2,reps:"8 each",notes:"Side-to-side bounds."}],plyoNote:"Plyo now standalone Monday after Session A."},
+    mon:{label:"Session A + Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:4,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (20–22")',sets:3,reps:8,notes:""},{id:"bounding",name:"Bounding",sets:3,reps:"30m",notes:""},{id:"lateral_hop",name:"Lateral Bounds",sets:2,reps:"8 each",notes:""}],plyoNote:"Plyo standalone Monday after Session A."},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:4,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:4,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"40 sec each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[]}}},
   12:{phase:"QUALITY",sessions:{
-    mon:{label:"Session A + Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:4,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (22–24")',sets:3,reps:8,notes:""},{id:"bounding",name:"Bounding",sets:3,reps:"40m",notes:""},{id:"depth_drop",name:"Depth Drops",sets:3,reps:8,notes:'Step off 12–18" box, land both feet, absorb fully.'},{id:"sl_hop",name:"Single-Leg Hops",sets:2,reps:"8 each",notes:""}],plyoNote:"Depth drops teach rapid force absorption."},
+    mon:{label:"Session A + Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:4,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:4,reps:12,weight:true,notes:""},{id:"dead_bug",name:"Dead Bug",sets:3,reps:"8 each",weight:false,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (22–24")',sets:3,reps:8,notes:""},{id:"bounding",name:"Bounding",sets:3,reps:"40m",notes:""},{id:"depth_drop",name:"Depth Drops",sets:3,reps:8,notes:'Step off 12–18" box, absorb fully.'},{id:"sl_hop",name:"Single-Leg Hops",sets:2,reps:"8 each",notes:""}],plyoNote:"Depth drops teach rapid force absorption."},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:4,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:4,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"45 sec each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[]}}},
   13:{phase:"QUALITY — Recovery",sessions:{
-    mon:{label:"Session A + Light Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:8,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (22")',sets:2,reps:8,notes:"Recovery — box jumps only."}],plyoNote:"Box jumps only — save legs for week 14."},
+    mon:{label:"Session A + Light Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:8,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (22")',sets:2,reps:8,notes:"Recovery — box jumps only."}],plyoNote:"Box jumps only."},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:3,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:2,reps:"45 sec each",weight:false,notes:""}],plyo:[]}}},
   14:{phase:"QUALITY",sessions:{
-    mon:{label:"Session A + Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"reactive_jump",name:"Depth Drop → Box Jump",sets:3,reps:6,notes:"Step off low box, land, immediately jump up. Minimal ground contact."},{id:"bounding",name:"Bounding",sets:3,reps:"40m",notes:""},{id:"sl_hop",name:"Single-Leg Hops",sets:3,reps:"8 each",notes:""}],plyoNote:"Reactive depth drop → box jump is the peak exercise."},
+    mon:{label:"Session A + Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"reactive_jump",name:"Depth Drop → Box Jump",sets:3,reps:6,notes:"Minimal ground contact time."},{id:"bounding",name:"Bounding",sets:3,reps:"40m",notes:""},{id:"sl_hop",name:"Single-Leg Hops",sets:3,reps:"8 each",notes:""}],plyoNote:"Reactive depth drop → box jump is the peak exercise."},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:3,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"45 sec each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[]}}},
   15:{phase:"QUALITY — Peak",sessions:{
     mon:{label:"Session A + Peak Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"8 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:8,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"reactive_jump",name:"Depth Drop → Box Jump",sets:3,reps:6,notes:""},{id:"box_jump",name:'Box Jumps (24")',sets:3,reps:8,notes:"Peak height."},{id:"bounding",name:"Bounding",sets:3,reps:"50m",notes:"Peak distance."},{id:"sl_hop",name:"Single-Leg Hops",sets:3,reps:"10 each",notes:""}],plyoNote:"Peak plyo volume of the cycle."},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:3,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:3,reps:"45 sec each",weight:false,notes:""},{id:"pallof",name:"Pallof Press",sets:3,reps:"10 each",weight:true,notes:""}],plyo:[]}}},
-  16:{phase:"QUALITY — Pre-Berlin",sessions:{
-    mon:{label:"Session A + Light Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"6 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:2,reps:8,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (22")',sets:2,reps:6,notes:"Light. Feel explosive, not fatigued."},{id:"bounding",name:"Bounding",sets:2,reps:"20m",notes:""}],plyoNote:"Pre-Berlin cutback."},
+  16:{phase:"QUALITY — Pre-Amsterdam",sessions:{
+    mon:{label:"Session A + Light Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"6 each",weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:2,reps:8,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (22")',sets:2,reps:6,notes:"Light. Feel explosive, not fatigued."},{id:"bounding",name:"Bounding",sets:2,reps:"20m",notes:""}],plyoNote:"Pre-Amsterdam cutback."},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust (barbell)",sets:3,reps:6,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:2,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:2,reps:"40 sec each",weight:false,notes:""}],plyo:[]}}},
-  17:{phase:"BERLIN RACE WEEK",sessions:{}},
-  18:{phase:"BERLIN RECOVERY",sessions:{}},
-  19:{phase:"POST-BERLIN REBUILD",sessions:{
-    mon:{label:"Session A + Light Plyo",day:"Monday",strength:[{id:"goblet_squat",name:"Goblet Squat",sets:3,reps:12,weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (20")',sets:2,reps:8,notes:"Assess landing feel post-Berlin."},{id:"bounding",name:"Bounding",sets:2,reps:"20m",notes:""}],plyoNote:"Skip if legs still heavy from Berlin."},
+  17:{phase:"AMSTERDAM RACE WEEK",sessions:{}},
+  18:{phase:"AMSTERDAM RECOVERY",sessions:{}},
+  19:{phase:"POST-AMSTERDAM REBUILD",sessions:{
+    mon:{label:"Session A + Light Plyo",day:"Monday",strength:[{id:"goblet_squat",name:"Goblet Squat",sets:3,reps:12,weight:true,notes:""},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (20")',sets:2,reps:8,notes:"Assess landing feel."},{id:"bounding",name:"Bounding",sets:2,reps:"20m",notes:""}],plyoNote:"Skip if legs still heavy from Amsterdam."},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust",sets:3,reps:10,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:3,reps:"8 each",weight:true,notes:""},{id:"copenhagen",name:"Copenhagen Adductor Plank",sets:2,reps:"40 sec each",weight:false,notes:""}],plyo:[]}}},
   20:{phase:"PHILLY SHARPEN",sessions:{
     mon:{label:"Session A + Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:3,reps:"8 each",weight:true,notes:"Last heavy session."},{id:"rdl",name:"Romanian Deadlift",sets:3,reps:10,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:3,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (22")',sets:3,reps:8,notes:""},{id:"bounding",name:"Bounding",sets:3,reps:"30m",notes:""},{id:"sl_hop",name:"Single-Leg Hops",sets:2,reps:"8 each",notes:""}],plyoNote:"Last real plyo session. Make it count."},
@@ -424,47 +567,80 @@ const WORKOUTS={
     mon:{label:"Session A + Minimal Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:2,reps:"8 each",weight:true,notes:""},{id:"hip_thrust",name:"Hip Thrust",sets:2,reps:8,weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:2,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (20")',sets:2,reps:6,notes:"Taper — quality only."}],plyoNote:"2×6 box jumps to keep system primed."},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust",sets:2,reps:8,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:2,reps:"8 each",weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:2,reps:10,weight:true,notes:""}],plyo:[]}}},
   22:{phase:"PHILLY TAPER",sessions:{
-    mon:{label:"Session A + Final Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:2,reps:"6 each",weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:2,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (18")',sets:2,reps:4,notes:"Final plyo session. Feel explosive."}],plyoNote:"Last plyo of the plan. 2×4. Done."},
+    mon:{label:"Session A + Final Plyo",day:"Monday",strength:[{id:"split_squat",name:"Bulgarian Split Squat",sets:2,reps:"6 each",weight:true,notes:""},{id:"calf_raise_sl",name:"Single-Leg Calf Raise",sets:2,reps:10,weight:true,notes:""}],plyo:[{id:"box_jump",name:'Box Jumps (18")',sets:2,reps:4,notes:"Final plyo session."}],plyoNote:"Last plyo of the plan. 2×4. Done."},
     thu:{label:"Session B",day:"Thursday",strength:[{id:"hip_thrust",name:"Hip Thrust",sets:2,reps:6,weight:true,notes:""},{id:"sl_rdl",name:"Single-Leg RDL",sets:2,reps:"6 each",weight:true,notes:""}],plyo:[]}}},
-  23:{phase:"PHILLY TAPER — Race Week",sessions:{}},
+  23:{phase:"PHILLY TAPER",sessions:{}},
   24:{phase:"RACE WEEK — PHILADELPHIA",sessions:{}},
 };
 
-const PHASE_LABELS={REBUILD:"Phase 1 — Rebuild",BASE:"Phase 2 — Base + Strides",QUALITY:"Phase 3 — Build Quality",BERLIN:"Berlin Race Week",RECOVERY:"Post-Berlin Recovery",TAPER:"Philly Taper",RACE:"Race Week"};
-const PHASE_ORDER=["REBUILD","BASE","QUALITY","BERLIN","RECOVERY","TAPER","RACE"];
-const BERLIN_DATE=new Date('2026-09-27');
+const PHASE_LABELS={REBUILD:"Phase 1 — Rebuild",BASE:"Phase 2 — Base + Strides",QUALITY:"Phase 3 — Build Quality",AMSTERDAM:"Amsterdam Race Week",RECOVERY:"Post-Amsterdam Recovery",TAPER:"Philly Taper",RACE:"Race Week"};
+const PHASE_ORDER=["REBUILD","BASE","QUALITY","AMSTERDAM","RECOVERY","TAPER","RACE"];
+const AMSTERDAM_DATE=new Date('2026-10-18');
 const PHILLY_DATE=new Date('2026-11-22');
 
-let scheduleState={},workoutLogs={};
-let currentView='weeks',currentWeek=null,currentWorkoutWeek=1,currentWorkoutSession=null,expandedExercise=null;
+// ── STATE ─────────────────────────────────────────────────────────────────────
+// actState: { "w1_mon_run": true, "w1_mon_yoga": false, ... }
+let actState={}, workoutLogs={};
+let currentView='weeks', currentWeek=null, currentWorkoutWeek=1, currentWorkoutSession=null, expandedExercise=null;
 
-function skey(wk,id){return`w${wk}_${id}`;}
-function wkey(wk,sd,t,id){return`wk${wk}_${sd}_${t}_${id}`;}
-function totalItems(){return SCHEDULE.reduce((s,w)=>s+w.days.length,0);}
-function doneItems(){return Object.values(scheduleState).filter(Boolean).length;}
-function weekDone(w){return w.days.every(d=>scheduleState[skey(w.wk,d.id)]);}
-function weekPct(w){return Math.round(w.days.filter(d=>scheduleState[skey(w.wk,d.id)]).length/w.days.length*100);}
+function akey(wk,dayId,act){return `w${wk}_${dayId}_${act}`;}
+function wkey(wk,sd,t,id){return `wk${wk}_${sd}_${t}_${id}`;}
+
+function load(){
+  try{const s=localStorage.getItem('m26-acts');if(s)actState=JSON.parse(s);}catch(e){}
+  // migrate old binary day state if present
+  try{const old=localStorage.getItem('m26-sched');if(old){const o=JSON.parse(old);Object.entries(o).forEach(([k,v])=>{if(v){const m=k.match(/^w(\d+)_(\w+)$/);if(m){const wk=+m[1],dayId=m[2];const day=SCHEDULE.find(w=>w.wk===wk)?.days.find(d=>d.id===dayId);if(day)day.activities.forEach(a=>{actState[akey(wk,dayId,a)]=true;});}}});}}catch(e){}
+  try{const w=localStorage.getItem('m26-workouts');if(w)workoutLogs=JSON.parse(w);}catch(e){}
+}
+function saveA(){try{localStorage.setItem('m26-acts',JSON.stringify(actState));}catch(e){}}
+function saveW(){try{localStorage.setItem('m26-workouts',JSON.stringify(workoutLogs));}catch(e){}}
+function daysUntil(d){return Math.max(0,Math.ceil((d-new Date())/86400000));}
+
+// ── SCORING ───────────────────────────────────────────────────────────────────
+// Score a single day: weighted fraction of activities completed
+// rest/race days: if marked, score = 0.95 (rest) or 1.0 (race)
+function dayScore(wk, day){
+  const acts=day.activities;
+  if(acts.includes('race')){return actState[akey(wk,day.id,'race')]?1.0:0;}
+  if(acts.length===1&&acts[0]==='rest'){return actState[akey(wk,day.id,'rest')]?0.95:0;}
+  // weighted activities
+  let totalW=0, doneW=0;
+  acts.forEach(a=>{
+    const w=ACT_WEIGHTS[a]||0;
+    totalW+=w;
+    if(actState[akey(wk,day.id,a)])doneW+=w;
+  });
+  if(totalW===0)return 0;
+  return doneW/totalW;
+}
+
+function weekScore(w){
+  const scores=w.days.map(d=>dayScore(w.wk,d));
+  return scores.reduce((a,b)=>a+b,0)/scores.length;
+}
+
+function overallScore(){
+  const scores=SCHEDULE.map(w=>weekScore(w));
+  return scores.reduce((a,b)=>a+b,0)/scores.length;
+}
+
+function dayFullyDone(wk,day){return dayScore(wk,day)>=0.999;}
+function weekFullyDone(w){return w.days.every(d=>dayFullyDone(w.wk,d));}
+
 function hasWorkoutLog(wk){return Object.keys(workoutLogs).some(k=>k.startsWith(`wk${wk}_`));}
 function sessionHasLog(wk,sd){return Object.keys(workoutLogs).some(k=>k.startsWith(`wk${wk}_${sd}_`));}
 function getSessionKeys(wk){return Object.keys(WORKOUTS[wk]?.sessions||{});}
-function phaseColor(p){return{REBUILD:'#4a9e6b',BASE:'#3d7ab5',QUALITY:'#c8863a',BERLIN:'#b83030',RECOVERY:'#7a5ab8',TAPER:'#3d7ab5',RACE:'#4a9e6b'}[p]||'#888';}
+function phaseColor(p){return{REBUILD:'#4a9e6b',BASE:'#3d7ab5',QUALITY:'#c8863a',AMSTERDAM:'#b83030',RECOVERY:'#7a5ab8',TAPER:'#3d7ab5',RACE:'#4a9e6b'}[p]||'#888';}
 
-function load(){
-  try{const s=localStorage.getItem('m26-sched');if(s)scheduleState=JSON.parse(s);}catch(e){}
-  try{const w=localStorage.getItem('m26-workouts');if(w)workoutLogs=JSON.parse(w);}catch(e){}
-}
-function saveS(){try{localStorage.setItem('m26-sched',JSON.stringify(scheduleState));}catch(e){}}
-function saveW(){try{localStorage.setItem('m26-workouts',JSON.stringify(workoutLogs));}catch(e){}}
-function daysUntil(d){return Math.max(0,Math.ceil((d-new Date())/(86400000)));}
-
+// ── VIEWS ─────────────────────────────────────────────────────────────────────
 function showView(v){
   currentView=v;
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(el=>el.classList.remove('active'));
-  const vmap={weeks:'weekListView',detail:'weekDetailView',stats:'statsView',pacing:'pacingView',workout:'workoutView'};
-  const nmap={weeks:'navWeeks',detail:'navWeeks',stats:'navStats',pacing:'navPacing',workout:'navWorkout'};
-  document.getElementById(vmap[v]).classList.add('active');
-  document.getElementById(nmap[v]).classList.add('active');
+  const vm={weeks:'weekListView',detail:'weekDetailView',stats:'statsView',pacing:'pacingView',workout:'workoutView'};
+  const nm={weeks:'navWeeks',detail:'navWeeks',stats:'navStats',pacing:'navPacing',workout:'navWorkout'};
+  document.getElementById(vm[v]).classList.add('active');
+  document.getElementById(nm[v]).classList.add('active');
   if(v==='weeks')renderWeekList();
   else if(v==='detail')renderDetail();
   else if(v==='stats')renderStats();
@@ -473,21 +649,24 @@ function showView(v){
   updateOverall();
 }
 
+// ── WEEK LIST ─────────────────────────────────────────────────────────────────
 function renderWeekList(){
-  const firstInc=SCHEDULE.find(w=>!weekDone(w));
-  let html='',lastPhase=null;
+  const firstInc=SCHEDULE.find(w=>!weekFullyDone(w));
+  let html='', lastPhase=null;
   SCHEDULE.forEach(w=>{
     if(w.phase!==lastPhase){html+=`<div class="phase-header">${PHASE_LABELS[w.phase]||w.phase}</div>`;lastPhase=w.phase;}
-    const pct=weekPct(w),done=weekDone(w),c=2*Math.PI*15,off=c-(pct/100)*c;
+    const pct=Math.round(weekScore(w)*100);
+    const done=weekFullyDone(w);
+    const c=2*Math.PI*15, off=c-(pct/100)*c;
     const isCur=firstInc&&w.wk===firstInc.wk;
-    const hasPlyo=w.days.some(d=>d.tags.includes('plyo'));
+    const hasPlyo=w.days.some(d=>d.activities.includes('plyo'));
     const hasLog=hasWorkoutLog(w.wk);
     let sub=`${w.mi} mi/week`;
-    if(w.phase==='BERLIN')sub='B Race · 3:20–3:25';
+    if(w.phase==='AMSTERDAM')sub='B Race · 3:20–3:25';
     if(w.phase==='RACE')sub='A Race · Sub-3:10';
     html+=`<div class="week-card${isCur?' current-week':''}" onclick="openWeek(${w.wk})">
       <div class="week-ring"><svg width="42" height="42" viewBox="0 0 42 42"><circle class="wring-bg" cx="21" cy="21" r="15"/><circle class="wring-fill" cx="21" cy="21" r="15" stroke-dasharray="${c.toFixed(2)}" stroke-dashoffset="${off.toFixed(2)}" style="stroke:${done?'var(--green)':pct>0?'var(--amber)':'var(--border2)'}"/></svg><div class="week-ring-label${done?' done':''}">${done?'✓':pct+'%'}</div></div>
-      <div class="week-card-body"><div class="week-card-top"><div class="week-card-num">WEEK ${w.wk}</div><div class="week-card-phase pc-${w.phase}">${w.phase}</div><div class="week-badges">${hasPlyo?'<span class="badge">🦘</span>':''}${hasLog?'<span class="badge">💪</span>':''}</div></div><div class="week-card-meta">${sub} · <strong>${w.days.filter(d=>scheduleState[skey(w.wk,d.id)]).length}/${w.days.length} days</strong></div></div>
+      <div class="week-card-body"><div class="week-card-top"><div class="week-card-num">WEEK ${w.wk}</div><div class="week-card-phase pc-${w.phase}">${w.phase}</div><div class="week-badges">${hasPlyo?'<span class="badge">🦘</span>':''}${hasLog?'<span class="badge">💪</span>':''}</div></div><div class="week-card-meta">${sub} · <strong>${pct}% complete</strong></div></div>
       <div class="week-card-chevron">›</div></div>`;
   });
   document.getElementById('weekListContent').innerHTML=html;
@@ -495,20 +674,41 @@ function renderWeekList(){
 
 function openWeek(wk){currentWeek=wk;showView('detail');}
 
+// ── DETAIL ────────────────────────────────────────────────────────────────────
 function renderDetail(){
   const w=SCHEDULE.find(x=>x.wk===currentWeek);if(!w)return;
-  const dc=w.days.filter(d=>scheduleState[skey(w.wk,d.id)]).length;
-  const pct=Math.round(dc/w.days.length*100);
-  document.getElementById('detailHeader').innerHTML=`<div class="detail-back" onclick="showView('weeks')">‹ All Weeks</div><div class="detail-title-row"><div class="detail-title">WEEK ${w.wk}</div><div class="detail-badge pc-${w.phase}">${w.phase}</div></div><div class="detail-stats"><div class="stat"><div class="stat-key">Target Miles</div><div class="stat-val">${w.mi} mi</div></div><div class="stat"><div class="stat-key">Days Done</div><div class="stat-val">${dc} / ${w.days.length}</div></div></div>`;
-  document.getElementById('detailProgress').innerHTML=`<span class="dp-label">WEEK ${pct}%</span><div class="dp-bar"><div class="dp-fill" style="width:${pct}%"></div></div><span class="dp-label">${dc}/${w.days.length}</span>`;
+  const pct=Math.round(weekScore(w)*100);
+  document.getElementById('detailHeader').innerHTML=`<div class="detail-back" onclick="showView('weeks')">‹ All Weeks</div><div class="detail-title-row"><div class="detail-title">WEEK ${w.wk}</div><div class="detail-badge pc-${w.phase}">${w.phase}</div></div><div class="detail-stats"><div class="stat"><div class="stat-key">Target Miles</div><div class="stat-val">${w.mi} mi</div></div><div class="stat"><div class="stat-key">Complete</div><div class="stat-val">${pct}%</div></div></div>`;
+  document.getElementById('detailProgress').innerHTML=`<span class="dp-label">WEEK</span><div class="dp-bar"><div class="dp-fill" style="width:${pct}%"></div></div><span class="dp-label">${pct}%</span>`;
   let html='<div class="section-label">Daily Schedule</div>';
   w.days.forEach(d=>{
-    const done=!!scheduleState[skey(w.wk,d.id)];
-    const tags=d.tags.map(t=>`<span class="tag ${t}">${t}</span>`).join('');
-    html+=`<div class="day-row${done?' done':''}" onclick="toggleDay(${w.wk},'${d.id}')"><div class="day-checkbox"><div class="check-inner">✓</div></div><div class="day-label">${d.label}</div><div class="day-content"><div class="day-text">${d.text}</div><div class="day-tags">${tags}</div></div></div>`;
+    const ds=Math.round(dayScore(w.wk,d)*100);
+    const allDone=dayFullyDone(w.wk,d);
+    html+=`<div class="day-card${allDone?' full-done':''}">
+      <div class="day-card-header">
+        <div class="day-label">${d.label}</div>
+        <div class="day-text">${d.text}</div>
+        <div class="day-pct">${ds}%</div>
+      </div>
+      <div class="day-activities">`;
+    d.activities.forEach(act=>{
+      const k=akey(w.wk,d.id,act);
+      const checked=!!actState[k];
+      html+=`<div class="act-pill ${act} ${checked?'checked':'unchecked'}" onclick="toggleAct(${w.wk},'${d.id}','${act}')">
+        <div class="act-check"></div>
+        ${ACT_ICONS[act]||''} ${ACT_LABELS[act]||act}
+      </div>`;
+    });
+    html+=`</div></div>`;
   });
   html+=`<div class="section-label">Week Notes</div><div class="info-cards"><div class="info-card amber-accent"><div class="info-card-label">📋 Coach Notes</div><div class="info-card-body">${w.notes}</div></div><div class="info-card green-accent" onclick="goToWorkout(${w.wk})"><div class="info-card-label">💪 Strength + Plyo</div><div class="info-card-body">Tap to open gym sessions for week ${w.wk} →</div></div></div>`;
   document.getElementById('detailScroll').innerHTML=html;
+}
+
+function toggleAct(wk,dayId,act){
+  const k=akey(wk,dayId,act);
+  actState[k]=!actState[k];
+  saveA();renderDetail();updateOverall();
 }
 
 function goToWorkout(wk){
@@ -519,10 +719,7 @@ function goToWorkout(wk){
   showView('workout');
 }
 
-function toggleDay(wk,id){
-  const k=skey(wk,id);scheduleState[k]=!scheduleState[k];saveS();renderDetail();updateOverall();
-}
-
+// ── WORKOUT ───────────────────────────────────────────────────────────────────
 function renderWorkoutWeekChips(){
   let html='';
   for(let wk=1;wk<=24;wk++){
@@ -532,10 +729,7 @@ function renderWorkoutWeekChips(){
   }
   const sc=document.getElementById('weekScroller');
   sc.innerHTML=html;
-  setTimeout(()=>{
-    const chips=sc.querySelectorAll('.week-chip');
-    if(chips[currentWorkoutWeek-1])chips[currentWorkoutWeek-1].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
-  },50);
+  setTimeout(()=>{const chips=sc.querySelectorAll('.week-chip');if(chips[currentWorkoutWeek-1])chips[currentWorkoutWeek-1].scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});},50);
 }
 
 function renderSessionTabs(){
@@ -554,11 +748,9 @@ function renderSessionTabs(){
 
 function selectWorkoutWeek(wk){
   currentWorkoutWeek=wk;currentWorkoutSession=null;expandedExercise=null;
-  const keys=getSessionKeys(wk);
-  if(keys.length)currentWorkoutSession=keys[0];
+  const keys=getSessionKeys(wk);if(keys.length)currentWorkoutSession=keys[0];
   renderWorkoutWeekChips();renderSessionTabs();renderWorkoutContent();
 }
-
 function selectSession(dk){currentWorkoutSession=dk;expandedExercise=null;renderSessionTabs();renderWorkoutContent();}
 
 function renderWorkoutContent(){
@@ -566,10 +758,7 @@ function renderWorkoutContent(){
   const sched=SCHEDULE.find(x=>x.wk===currentWorkoutWeek);
   if(!w){document.getElementById('workoutContent').innerHTML='<div class="empty-week">No data.</div>';return;}
   const keys=getSessionKeys(currentWorkoutWeek);
-  if(!keys.length){
-    document.getElementById('workoutContent').innerHTML=`<div class="workout-phase-header"><div class="wph-top"><div class="wph-week">WEEK ${currentWorkoutWeek}</div><div class="wph-phase pc-${sched?.phase||''}">${w.phase}</div></div></div><div class="empty-week">No strength or plyo this week.</div>`;
-    return;
-  }
+  if(!keys.length){document.getElementById('workoutContent').innerHTML=`<div class="workout-phase-header"><div class="wph-top"><div class="wph-week">WEEK ${currentWorkoutWeek}</div><div class="wph-phase pc-${sched?.phase||''}">${w.phase}</div></div></div><div class="empty-week">No strength or plyo this week.</div>`;return;}
   const sess=w.sessions[currentWorkoutSession];
   if(!sess){document.getElementById('workoutContent').innerHTML='<div class="empty-week">Select a session above.</div>';return;}
   let html=`<div class="workout-phase-header"><div class="wph-top"><div class="wph-week">WEEK ${currentWorkoutWeek}</div><div class="wph-phase pc-${sched?.phase||''}">${w.phase}</div></div><div class="wph-freq">${sess.label} — ${sess.day}</div></div>`;
@@ -615,57 +804,41 @@ function renderExCard(wk,sd,type,ex,isPlyo){
 }
 
 function toggleEx(ek){expandedExercise=expandedExercise===ek?null:ek;renderWorkoutContent();setTimeout(()=>{const c=document.getElementById(`excard_${ek}`);if(c&&expandedExercise===ek)c.scrollIntoView({behavior:'smooth',block:'nearest'});},50);}
+function addSet(wk,sd,type,exId,ek){const k=wkey(wk,sd,type,exId);workoutLogs[k]=[...(workoutLogs[k]||[]),{reps:'',weight:''}];saveW();expandedExercise=ek;renderWorkoutContent();}
+function saveLog(wk,sd,type,exId,ek){const sets=[];let i=0;while(document.getElementById(`inp_${ek}_${i}_r`)){const r=document.getElementById(`inp_${ek}_${i}_r`)?.value||'';const wt=document.getElementById(`inp_${ek}_${i}_w`)?.value||'';if(r||wt)sets.push({reps:r,weight:wt});i++;}if(sets.length){workoutLogs[wkey(wk,sd,type,exId)]=sets;saveW();}expandedExercise=null;renderWorkoutContent();renderSessionTabs();renderWorkoutWeekChips();}
+function clearLog(wk,sd,type,exId){delete workoutLogs[wkey(wk,sd,type,exId)];saveW();expandedExercise=null;renderWorkoutContent();renderSessionTabs();renderWorkoutWeekChips();}
 
-function addSet(wk,sd,type,exId,ek){
-  const k=wkey(wk,sd,type,exId);
-  workoutLogs[k]=[...(workoutLogs[k]||[]),{reps:'',weight:''}];
-  saveW();expandedExercise=ek;renderWorkoutContent();
-}
-
-function saveLog(wk,sd,type,exId,ek){
-  const sets=[];let i=0;
-  while(document.getElementById(`inp_${ek}_${i}_r`)){
-    const r=document.getElementById(`inp_${ek}_${i}_r`)?.value||'';
-    const wt=document.getElementById(`inp_${ek}_${i}_w`)?.value||'';
-    if(r||wt)sets.push({reps:r,weight:wt});
-    i++;
-  }
-  if(sets.length){workoutLogs[wkey(wk,sd,type,exId)]=sets;saveW();}
-  expandedExercise=null;renderWorkoutContent();renderSessionTabs();renderWorkoutWeekChips();
-}
-
-function clearLog(wk,sd,type,exId){
-  delete workoutLogs[wkey(wk,sd,type,exId)];saveW();
-  expandedExercise=null;renderWorkoutContent();renderSessionTabs();renderWorkoutWeekChips();
-}
-
+// ── STATS ─────────────────────────────────────────────────────────────────────
 function renderStats(){
-  const td=doneItems(),tot=totalItems(),pct=Math.round(td/tot*100);
-  const c=2*Math.PI*32,off=c-(pct/100)*c;
-  const wc=SCHEDULE.filter(w=>weekDone(w)).length;
-  const mi=SCHEDULE.filter(w=>weekDone(w)).reduce((s,w)=>s+w.mi,0);
+  const pct=Math.round(overallScore()*100);
+  const c=2*Math.PI*32, off=c-(pct/100)*c;
+  const wc=SCHEDULE.filter(w=>weekFullyDone(w)).length;
+  const mi=SCHEDULE.filter(w=>weekFullyDone(w)).reduce((s,w)=>s+w.mi,0);
   const sl=new Set(Object.keys(workoutLogs).map(k=>{const p=k.split('_');return`${p[0]}_${p[1]}_${p[2]}`;})).size;
   const phases={};
-  SCHEDULE.forEach(w=>{if(!phases[w.phase])phases[w.phase]={tot:0,done:0};phases[w.phase].tot+=w.days.length;phases[w.phase].done+=w.days.filter(d=>scheduleState[skey(w.wk,d.id)]).length;});
+  SCHEDULE.forEach(w=>{if(!phases[w.phase])phases[w.phase]={scores:[]};phases[w.phase].scores.push(weekScore(w));});
   let pr='';
-  PHASE_ORDER.forEach(p=>{if(!phases[p])return;const pp=Math.round(phases[p].done/phases[p].tot*100);pr+=`<div class="phase-row"><div class="phase-row-label">${p}</div><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:${pp}%;background:${phaseColor(p)}"></div></div><div class="phase-row-pct">${pp}%</div></div>`;});
-  const bd=daysUntil(BERLIN_DATE),pd=daysUntil(PHILLY_DATE);
-  document.getElementById('statsContent').innerHTML=`<div class="stats-hero"><div class="big-ring"><svg width="76" height="76" viewBox="0 0 76 76"><circle class="big-ring-bg" cx="38" cy="38" r="32"/><circle class="big-ring-fill" cx="38" cy="38" r="32" stroke-dasharray="${c.toFixed(2)}" stroke-dashoffset="${off.toFixed(2)}"/></svg><div class="big-ring-text"><div class="big-ring-pct">${pct}%</div><div class="big-ring-sub">done</div></div></div><div><div class="stats-hero-title">Overall Progress</div><div class="stats-hero-sub">${td} of ${tot} sessions · ${wc} full weeks</div></div></div><div class="stats-grid"><div class="stat-card"><div class="stat-card-val" style="color:var(--green-text)">${wc}</div><div class="stat-card-label">Weeks Complete</div></div><div class="stat-card"><div class="stat-card-val" style="color:var(--amber-text)">${24-wc}</div><div class="stat-card-label">Weeks Remaining</div></div><div class="stat-card"><div class="stat-card-val" style="color:var(--blue-text)">${mi}</div><div class="stat-card-label">Miles Logged</div></div><div class="stat-card"><div class="stat-card-val" style="color:var(--plyo-text)">${sl}</div><div class="stat-card-label">Sessions Logged</div></div></div><div class="race-countdown"><div class="section-title">Race Countdowns</div><div class="countdown-item"><div class="countdown-race"><div class="race-dot berlin"></div><div><div class="countdown-name">Berlin Marathon</div><div class="countdown-sub">B Race · Sep 27, 2026</div></div></div><div><div class="countdown-num" style="color:var(--red)">${bd}</div><div class="countdown-days-label">days away</div></div></div><div class="countdown-item"><div class="countdown-race"><div class="race-dot philly"></div><div><div class="countdown-name">Philadelphia Marathon</div><div class="countdown-sub">A Race · Sub-3:10 · Nov 22</div></div></div><div><div class="countdown-num" style="color:var(--green-text)">${pd}</div><div class="countdown-days-label">days away</div></div></div></div><div class="phase-breakdown"><div class="section-title">By Phase</div>${pr}</div>`;
+  PHASE_ORDER.forEach(p=>{if(!phases[p])return;const scores=phases[p].scores;const pp=Math.round(scores.reduce((a,b)=>a+b,0)/scores.length*100);pr+=`<div class="phase-row"><div class="phase-row-label">${p}</div><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:${pp}%;background:${phaseColor(p)}"></div></div><div class="phase-row-pct">${pp}%</div></div>`;});
+  const ad=daysUntil(AMSTERDAM_DATE), pd=daysUntil(PHILLY_DATE);
+  document.getElementById('statsContent').innerHTML=`<div class="stats-hero"><div class="big-ring"><svg width="76" height="76" viewBox="0 0 76 76"><circle class="big-ring-bg" cx="38" cy="38" r="32"/><circle class="big-ring-fill" cx="38" cy="38" r="32" stroke-dasharray="${c.toFixed(2)}" stroke-dashoffset="${off.toFixed(2)}"/></svg><div class="big-ring-text"><div class="big-ring-pct">${pct}%</div><div class="big-ring-sub">done</div></div></div><div><div class="stats-hero-title">Overall Progress</div><div class="stats-hero-sub">${wc} full weeks complete · ${mi} miles logged</div></div></div><div class="stats-grid"><div class="stat-card"><div class="stat-card-val" style="color:var(--green-text)">${wc}</div><div class="stat-card-label">Weeks Complete</div></div><div class="stat-card"><div class="stat-card-val" style="color:var(--amber-text)">${24-wc}</div><div class="stat-card-label">Weeks Remaining</div></div><div class="stat-card"><div class="stat-card-val" style="color:var(--blue-text)">${mi}</div><div class="stat-card-label">Miles Logged</div></div><div class="stat-card"><div class="stat-card-val" style="color:var(--plyo-text)">${sl}</div><div class="stat-card-label">Gym Sessions</div></div></div><div class="race-countdown"><div class="section-title">Race Countdowns</div><div class="countdown-item"><div class="countdown-race"><div class="race-dot amsterdam"></div><div><div class="countdown-name">Amsterdam Marathon</div><div class="countdown-sub">B Race · Oct 18, 2026</div></div></div><div><div class="countdown-num" style="color:var(--red)">${ad}</div><div class="countdown-days-label">days away</div></div></div><div class="countdown-item"><div class="countdown-race"><div class="race-dot philly"></div><div><div class="countdown-name">Philadelphia Marathon</div><div class="countdown-sub">A Race · Sub-3:10 · Nov 22</div></div></div><div><div class="countdown-num" style="color:var(--green-text)">${pd}</div><div class="countdown-days-label">days away</div></div></div></div><div class="phase-breakdown"><div class="section-title">By Phase</div>${pr}</div>`;
 }
 
+// ── PACING ────────────────────────────────────────────────────────────────────
 function renderPacing(){
-  document.getElementById('pacingContent').innerHTML=`<div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:var(--blue)"></div><div class="pacing-card-title">EASY PACE</div></div><div class="pacing-pace" style="color:var(--blue-text)">8:30 – 9:00 /mi</div><div class="pacing-feel">Fully conversational. Complete sentences without effort.</div><div class="pacing-use">80%+ of all running in this plan.</div></div><div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:var(--amber)"></div><div class="pacing-card-title">MARATHON PACE (M)</div></div><div class="pacing-pace" style="color:var(--amber-text)">7:10 – 7:20 /mi</div><div class="pacing-feel">Comfortably challenging. Short phrases when speaking. Your sub-3:10 race pace.</div><div class="pacing-use">Long run final segments, race simulation.</div></div><div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:var(--red)"></div><div class="pacing-card-title">THRESHOLD PACE (T)</div></div><div class="pacing-pace" style="color:#e07060">6:45 – 6:50 /mi</div><div class="pacing-feel">Comfortably hard. 2–3 words max. ~25 min continuous max.</div><div class="pacing-use">Cruise intervals on quality days only.</div></div><div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:var(--green)"></div><div class="pacing-card-title">STRIDES</div></div><div class="pacing-pace" style="color:var(--green-text)">6:00 – 6:20 /mi</div><div class="pacing-feel">Short controlled accelerations. Build 20m, hold 60m, coast 20m.</div><div class="pacing-use">100m each, full walk-back recovery.</div></div><div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:#888"></div><div class="pacing-card-title">BERLIN PACE</div></div><div class="pacing-pace" style="color:#aaa">7:40 – 7:50 /mi</div><div class="pacing-feel">B race controlled effort. Hold pace no matter how good you feel at mile 18.</div></div><div class="race-strategy"><div class="race-strategy-title">🏁 PHILLY RACE PLAN</div><div class="split-row"><div class="split-miles">Mi 1–5</div><div class="split-pace" style="color:var(--blue-text)">7:20–7:25</div><div class="split-note">Hold back. Downhill start — resist the crowd.</div></div><div class="split-row"><div class="split-miles">Mi 6–13</div><div class="split-pace" style="color:var(--amber-text)">7:15–7:20</div><div class="split-note">Settle in. Should feel easy — if not, back off.</div></div><div class="split-row"><div class="split-miles">Mi 14–18</div><div class="split-pace" style="color:var(--amber-text)">7:15–7:20</div><div class="split-note">Hold pace. This is where training pays off.</div></div><div class="split-row"><div class="split-miles">Mi 19–22</div><div class="split-pace" style="color:#e07060">By feel</div><div class="split-note">Shorten stride, increase cadence.</div></div><div class="split-row"><div class="split-miles">Mi 23–26.2</div><div class="split-pace" style="color:var(--green-text)">Everything</div><div class="split-note">Leave nothing on the course.</div></div></div><div class="race-strategy"><div class="race-strategy-title">💊 RACE FUEL</div><div class="split-row"><div class="split-miles">Mile 5</div><div class="split-pace" style="color:var(--amber-text)">Gel #1</div><div class="split-note">Don't wait until you feel you need it.</div></div><div class="split-row"><div class="split-miles">Mile 10</div><div class="split-pace" style="color:var(--amber-text)">Gel #2</div><div class="split-note">Stay on schedule. Water at every stop.</div></div><div class="split-row"><div class="split-miles">Mile 14</div><div class="split-pace" style="color:var(--amber-text)">Gel #3</div><div class="split-note"></div></div><div class="split-row"><div class="split-miles">Mile 18</div><div class="split-pace" style="color:var(--amber-text)">Gel #4</div><div class="split-note">Critical. This is where most people bonk.</div></div><div class="split-row"><div class="split-miles">Mile 22</div><div class="split-pace" style="color:var(--amber-text)">Gel #5</div><div class="split-note">Final gel. 4 miles to go.</div></div></div>`;
+  document.getElementById('pacingContent').innerHTML=`<div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:var(--blue)"></div><div class="pacing-card-title">EASY PACE</div></div><div class="pacing-pace" style="color:var(--blue-text)">8:30 – 9:00 /mi</div><div class="pacing-feel">Fully conversational. Complete sentences without effort.</div><div class="pacing-use">80%+ of all running in this plan.</div></div><div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:var(--amber)"></div><div class="pacing-card-title">MARATHON PACE (M)</div></div><div class="pacing-pace" style="color:var(--amber-text)">7:10 – 7:20 /mi</div><div class="pacing-feel">Comfortably challenging. Short phrases when speaking. Your sub-3:10 race pace.</div><div class="pacing-use">Long run final segments, race simulation.</div></div><div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:var(--red)"></div><div class="pacing-card-title">THRESHOLD PACE (T)</div></div><div class="pacing-pace" style="color:#e07060">6:45 – 6:50 /mi</div><div class="pacing-feel">Comfortably hard. 2–3 words max. ~25 min continuous max.</div><div class="pacing-use">Cruise intervals on quality days only.</div></div><div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:var(--green)"></div><div class="pacing-card-title">STRIDES</div></div><div class="pacing-pace" style="color:var(--green-text)">6:00 – 6:20 /mi</div><div class="pacing-feel">Short controlled accelerations. Build 20m, hold 60m, coast 20m.</div><div class="pacing-use">100m each, full walk-back recovery.</div></div><div class="pacing-card"><div class="pacing-card-header"><div class="pacing-dot" style="background:#888"></div><div class="pacing-card-title">AMSTERDAM PACE</div></div><div class="pacing-pace" style="color:#aaa">7:40 – 7:50 /mi</div><div class="pacing-feel">B race controlled effort. Hold pace no matter how good you feel at mile 18.</div></div><div class="race-strategy"><div class="race-strategy-title">🏁 PHILLY RACE PLAN</div><div class="split-row"><div class="split-miles">Mi 1–5</div><div class="split-pace" style="color:var(--blue-text)">7:20–7:25</div><div class="split-note">Hold back. Downhill start — resist the crowd.</div></div><div class="split-row"><div class="split-miles">Mi 6–13</div><div class="split-pace" style="color:var(--amber-text)">7:15–7:20</div><div class="split-note">Settle in. Should feel easy — if not, back off.</div></div><div class="split-row"><div class="split-miles">Mi 14–18</div><div class="split-pace" style="color:var(--amber-text)">7:15–7:20</div><div class="split-note">Hold pace. This is where training pays off.</div></div><div class="split-row"><div class="split-miles">Mi 19–22</div><div class="split-pace" style="color:#e07060">By feel</div><div class="split-note">Shorten stride, increase cadence.</div></div><div class="split-row"><div class="split-miles">Mi 23–26.2</div><div class="split-pace" style="color:var(--green-text)">Everything</div><div class="split-note">Leave nothing on the course.</div></div></div><div class="race-strategy"><div class="race-strategy-title">💊 RACE FUEL</div><div class="split-row"><div class="split-miles">Mile 5</div><div class="split-pace" style="color:var(--amber-text)">Gel #1</div><div class="split-note">Don't wait until you feel you need it.</div></div><div class="split-row"><div class="split-miles">Mile 10</div><div class="split-pace" style="color:var(--amber-text)">Gel #2</div><div class="split-note">Stay on schedule. Water at every stop.</div></div><div class="split-row"><div class="split-miles">Mile 14</div><div class="split-pace" style="color:var(--amber-text)">Gel #3</div><div class="split-note"></div></div><div class="split-row"><div class="split-miles">Mile 18</div><div class="split-pace" style="color:var(--amber-text)">Gel #4</div><div class="split-note">Critical. This is where most people bonk.</div></div><div class="split-row"><div class="split-miles">Mile 22</div><div class="split-pace" style="color:var(--amber-text)">Gel #5</div><div class="split-note">Final gel. 4 miles to go.</div></div></div>`;
 }
 
+// ── OVERALL RING ──────────────────────────────────────────────────────────────
 function updateOverall(){
-  const pct=Math.round(doneItems()/totalItems()*100);
-  const c=2*Math.PI*13,off=c-(pct/100)*c;
+  const pct=Math.round(overallScore()*100);
+  const c=2*Math.PI*13, off=c-(pct/100)*c;
   const el=document.getElementById('overallRingFill');if(el)el.setAttribute('stroke-dashoffset',off.toFixed(2));
   const pe=document.getElementById('overallPct');if(pe)pe.textContent=pct+'%';
 }
 
+// ── INIT ──────────────────────────────────────────────────────────────────────
 load();
-const fi=SCHEDULE.find(w=>!weekDone(w));
+const fi=SCHEDULE.find(w=>!weekFullyDone(w));
 if(fi){currentWorkoutWeek=fi.wk;const k=getSessionKeys(fi.wk);currentWorkoutSession=k[0]||null;}
 showView('weeks');
 </script>
