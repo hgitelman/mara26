@@ -103,6 +103,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .act-pill.plyo.checked{color:#fff;background:var(--plyo);border-color:var(--plyo);}
 .act-pill.stairmaster.checked{color:#fff;background:var(--purple);border-color:var(--purple);}
 .act-pill.yoga.checked{color:#fff;background:var(--green);border-color:var(--green);}
+.act-pill.walk.checked{color:#fff;background:#8a7a52;border-color:#8a7a52;}
 .act-pill.rest.checked{color:#fff;background:var(--text-muted);border-color:var(--text-muted);}
 .act-pill.race.checked{color:#fff;background:var(--amber);border-color:var(--amber);}
 .act-check{width:12px;height:12px;border-radius:3px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;}
@@ -227,6 +228,38 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .log-btn.save-strength{background:var(--amber);border-color:var(--amber);color:var(--bg);font-weight:600;}
 .log-btn.save-plyo{background:var(--plyo);border-color:var(--plyo);color:var(--bg);font-weight:600;}
 .log-btn.clear{background:transparent;border-color:var(--border2);color:var(--text-muted);flex:0 0 60px;}
+
+/* EDIT MODE */
+.detail-edit-bar{display:flex;align-items:center;gap:10px;padding:8px 20px;background:var(--surface2);border-bottom:1px solid var(--border);flex-shrink:0;}
+.edit-toggle{flex:1;display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:7px;border:1px solid var(--border2);background:var(--surface);color:var(--text-dim);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+.edit-toggle.on{background:var(--amber);border-color:var(--amber);color:var(--bg);font-weight:600;}
+.edit-toggle:active{opacity:0.7;}
+.reset-week-btn{padding:6px 12px;border-radius:7px;border:1px solid var(--border2);background:transparent;color:var(--text-muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+.reset-week-btn:active{opacity:0.7;}
+.reset-week-btn.has-override{color:var(--amber-text);border-color:var(--amber-dim);}
+.reset-week-btn.confirming{background:var(--red);border-color:var(--red);color:#fff;font-weight:600;}
+.edit-hint{padding:8px 20px 0;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--text-muted);text-transform:uppercase;}
+.override-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;padding:1px 5px;border-radius:3px;background:var(--amber-dim);color:var(--amber-text);margin-left:6px;text-transform:uppercase;}
+
+/* EDIT MODE — day card */
+.day-card.editing{cursor:pointer;border-style:dashed;}
+.day-card.editing:active{opacity:0.85;}
+.day-card.selected{border-color:var(--amber);background:rgba(200,134,58,0.08);border-style:solid;}
+.day-card.drag-source{opacity:0.4;}
+.day-card.drag-over{border-color:var(--amber);background:var(--green-glow);border-style:solid;}
+.day-grip{font-family:'DM Mono',monospace;font-size:14px;color:var(--text-muted);padding:0 4px 0 8px;cursor:grab;line-height:1;letter-spacing:-2px;}
+.day-clear{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1px solid var(--border2);background:var(--surface2);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;flex-shrink:0;}
+.day-clear:active{opacity:0.7;}
+.day-clear:hover{color:var(--red);border-color:var(--red);}
+
+/* EDIT MODE — activity pills */
+.act-pill.removable{padding-right:5px;}
+.act-pill-x{margin-left:4px;width:14px;height:14px;border-radius:50%;background:rgba(0,0,0,0.25);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;line-height:1;}
+.act-pill.unchecked .act-pill-x{background:var(--border2);color:var(--text-muted);}
+.act-pill-x:active{opacity:0.7;}
+
+/* Empty day (rest after clear) */
+.day-empty-note{padding:0 15px 11px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);font-style:italic;}
 </style>
 </head>
 <body>
@@ -246,6 +279,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <div id="weekDetailView" class="view">
       <div class="view-flex">
         <div class="detail-header" id="detailHeader"></div>
+        <div class="detail-edit-bar" id="detailEditBar"></div>
         <div class="detail-progress" id="detailProgress"></div>
         <div class="detail-scroll" id="detailScroll"></div>
       </div>
@@ -272,9 +306,9 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 </div>
 <script>
 // ── ACTIVITY WEIGHTS ──────────────────────────────────────────────────────────
-const ACT_WEIGHTS={run:0.70,strength:0.15,plyo:0.07,stairmaster:0.05,yoga:0.03};
-const ACT_LABELS={run:'Run',strength:'Strength',plyo:'Plyo',stairmaster:'Stairs',yoga:'Yoga',rest:'Rest',race:'Race'};
-const ACT_ICONS={run:'🏃',strength:'💪',plyo:'🦘',stairmaster:'🪜',yoga:'🧘',rest:'😴',race:'🏁'};
+const ACT_WEIGHTS={run:0.70,strength:0.15,plyo:0.06,stairmaster:0.05,yoga:0.03,walk:0.01};
+const ACT_LABELS={run:'Run',strength:'Strength',plyo:'Plyo',stairmaster:'Stairs',yoga:'Yoga',walk:'Walk',rest:'Rest',race:'Race'};
+const ACT_ICONS={run:'🏃',strength:'💪',plyo:'🦘',stairmaster:'🪜',yoga:'🧘',walk:'🚶',rest:'😴',race:'🏁'};
 
 // ── SCHEDULE ──────────────────────────────────────────────────────────────────
 // activities: array of activity types present in that day
@@ -288,7 +322,7 @@ const SCHEDULE=[
     {id:"thu",label:"THU",text:"Easy 5 mi + Strength",activities:["run","strength"]},
     {id:"fri",label:"FRI",text:"Rest or walk 30 min",activities:["rest"]},
     {id:"sat",label:"SAT",text:"Easy 5 mi",activities:["run"]},
-    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga","walk"]},
   ],notes:"All runs conversational easy pace (~8:30–9:00/mi). Zero intensity. Re-establish the routine."},
   {wk:2,phase:"REBUILD",mi:22,days:[
     {id:"mon",label:"MON",text:"Easy 5 mi + Stairmaster 20 min",activities:["run","stairmaster"]},
@@ -297,7 +331,7 @@ const SCHEDULE=[
     {id:"thu",label:"THU",text:"Easy 6 mi + Strength",activities:["run","strength"]},
     {id:"fri",label:"FRI",text:"Rest or walk 30 min",activities:["rest"]},
     {id:"sat",label:"SAT",text:"Easy 6 mi",activities:["run"]},
-    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga","walk"]},
   ],notes:"Build the habit of back-to-back days. Keep heart rate genuinely low."},
   {wk:3,phase:"REBUILD",mi:27,days:[
     {id:"mon",label:"MON",text:"Easy 5 mi + Stairmaster 25 min",activities:["run","stairmaster"]},
@@ -306,7 +340,7 @@ const SCHEDULE=[
     {id:"thu",label:"THU",text:"Easy 6 mi + Stairmaster 20 min + Strength",activities:["run","stairmaster","strength"]},
     {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
     {id:"sat",label:"SAT",text:"Long easy 8 mi",activities:["run"]},
-    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga","walk"]},
   ],notes:"First week with a real long run. Keep it all easy."},
   {wk:4,phase:"REBUILD",mi:30,days:[
     {id:"mon",label:"MON",text:"Easy 6 mi + Stairmaster 25 min + Strength A",activities:["run","stairmaster","strength"]},
@@ -315,7 +349,7 @@ const SCHEDULE=[
     {id:"thu",label:"THU",text:"Easy 7 mi + Strength B + Intro Plyo",activities:["run","strength","plyo"]},
     {id:"fri",label:"FRI",text:"Easy 4 mi",activities:["run"]},
     {id:"sat",label:"SAT",text:"Long easy 10 mi",activities:["run"]},
-    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 25 min",activities:["yoga"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 25 min",activities:["yoga","walk"]},
   ],notes:"First plyo work Thursday after strength. Landing mechanics only. 2x/week strength begins."},
   {wk:5,phase:"REBUILD",mi:24,days:[
     {id:"mon",label:"MON",text:"Easy 5 mi + Stairmaster 20 min + Strength A",activities:["run","stairmaster","strength"]},
@@ -324,7 +358,7 @@ const SCHEDULE=[
     {id:"thu",label:"THU",text:"Easy 5 mi + Strength B (cutback, no plyo)",activities:["run","strength"]},
     {id:"fri",label:"FRI",text:"Rest",activities:["rest"]},
     {id:"sat",label:"SAT",text:"Easy 9 mi",activities:["run"]},
-    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga","walk"]},
   ],notes:"Cutback week. Let your body absorb the load."},
   {wk:6,phase:"REBUILD",mi:36,days:[
     {id:"mon",label:"MON",text:"Easy 7 mi + Stairmaster 30 min + Strength A",activities:["run","stairmaster","strength"]},
@@ -333,7 +367,7 @@ const SCHEDULE=[
     {id:"thu",label:"THU",text:"Easy 7 mi + Strength B + Plyo",activities:["run","strength","plyo"]},
     {id:"fri",label:"FRI",text:"Easy 5 mi",activities:["run"]},
     {id:"sat",label:"SAT",text:"Long easy 12 mi",activities:["run"]},
-    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga"]},
+    {id:"sun",label:"SUN",text:"Yoga 45 min + walk 20 min",activities:["yoga","walk"]},
   ],notes:"End of Phase 1. 2x/week strength now standard. Plyo resumes Thursday after Strength B."},
 
   // ── WEEKS 7–16: BASE + QUALITY toward Amsterdam ──
@@ -441,11 +475,11 @@ const SCHEDULE=[
 
   // ── WEEK 18: RECOVERY ──
   {wk:18,phase:"RECOVERY",mi:28,days:[
-    {id:"mon",label:"MON",text:"Walk 30 min only",activities:["rest"]},
+    {id:"mon",label:"MON",text:"Walk 30 min only",activities:["walk"]},
     {id:"tue",label:"TUE",text:"Easy 4 mi if legs feel OK, otherwise walk",activities:["run"]},
     {id:"wed",label:"WED",text:"Gentle Yoga 60 min",activities:["yoga"]},
     {id:"thu",label:"THU",text:"Easy 5 mi",activities:["run"]},
-    {id:"fri",label:"FRI",text:"Walk 30 min",activities:["rest"]},
+    {id:"fri",label:"FRI",text:"Walk 30 min",activities:["walk"]},
     {id:"sat",label:"SAT",text:"Easy 8 mi",activities:["run"]},
     {id:"sun",label:"SUN",text:"Yoga 45 min",activities:["yoga"]},
   ],notes:"Full Amsterdam recovery. Protein and anti-inflammatory food priority."},
@@ -580,20 +614,28 @@ const PHILLY_DATE=new Date('2026-11-22');
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 // actState: { "w1_mon_run": true, "w1_mon_yoga": false, ... }
-let actState={}, workoutLogs={};
+// weekOverrides: { 5: [{id:"mon",label:"MON",text:"...",activities:[...]}, ...], ... }
+//   When present, replaces SCHEDULE[wk-1].days for that week. id+label stay tied to slot.
+let actState={}, workoutLogs={}, weekOverrides={};
 let currentView='weeks', currentWeek=null, currentWorkoutWeek=1, currentWorkoutSession=null, expandedExercise=null;
+let editMode=false, dragSourceIdx=null, selectedIdx=null, resetConfirmWk=null;
 
 function akey(wk,dayId,act){return `w${wk}_${dayId}_${act}`;}
 function wkey(wk,sd,t,id){return `wk${wk}_${sd}_${t}_${id}`;}
+
+// Return the effective days array for a week (override if present, otherwise defaults)
+function getDays(w){return weekOverrides[w.wk]||w.days;}
 
 function load(){
   try{const s=localStorage.getItem('m26-acts');if(s)actState=JSON.parse(s);}catch(e){}
   // migrate old binary day state if present
   try{const old=localStorage.getItem('m26-sched');if(old){const o=JSON.parse(old);Object.entries(o).forEach(([k,v])=>{if(v){const m=k.match(/^w(\d+)_(\w+)$/);if(m){const wk=+m[1],dayId=m[2];const day=SCHEDULE.find(w=>w.wk===wk)?.days.find(d=>d.id===dayId);if(day)day.activities.forEach(a=>{actState[akey(wk,dayId,a)]=true;});}}});}}catch(e){}
   try{const w=localStorage.getItem('m26-workouts');if(w)workoutLogs=JSON.parse(w);}catch(e){}
+  try{const o=localStorage.getItem('m26-overrides');if(o)weekOverrides=JSON.parse(o);}catch(e){}
 }
 function saveA(){try{localStorage.setItem('m26-acts',JSON.stringify(actState));}catch(e){}}
 function saveW(){try{localStorage.setItem('m26-workouts',JSON.stringify(workoutLogs));}catch(e){}}
+function saveO(){try{localStorage.setItem('m26-overrides',JSON.stringify(weekOverrides));}catch(e){}}
 function daysUntil(d){return Math.max(0,Math.ceil((d-new Date())/86400000));}
 
 // ── SCORING ───────────────────────────────────────────────────────────────────
@@ -601,8 +643,10 @@ function daysUntil(d){return Math.max(0,Math.ceil((d-new Date())/86400000));}
 // rest/race days: if marked, score = 0.95 (rest) or 1.0 (race)
 function dayScore(wk, day){
   const acts=day.activities;
+  // Cleared/empty day counts as a full rest day (100%)
+  if(acts.length===0)return 1.0;
   if(acts.includes('race')){return actState[akey(wk,day.id,'race')]?1.0:0;}
-  if(acts.length===1&&acts[0]==='rest'){return actState[akey(wk,day.id,'rest')]?0.95:0;}
+  if(acts.length===1&&acts[0]==='rest'){return actState[akey(wk,day.id,'rest')]?1.0:0;}
   // weighted activities
   let totalW=0, doneW=0;
   acts.forEach(a=>{
@@ -615,7 +659,8 @@ function dayScore(wk, day){
 }
 
 function weekScore(w){
-  const scores=w.days.map(d=>dayScore(w.wk,d));
+  const days=getDays(w);
+  const scores=days.map(d=>dayScore(w.wk,d));
   return scores.reduce((a,b)=>a+b,0)/scores.length;
 }
 
@@ -625,7 +670,7 @@ function overallScore(){
 }
 
 function dayFullyDone(wk,day){return dayScore(wk,day)>=0.999;}
-function weekFullyDone(w){return w.days.every(d=>dayFullyDone(w.wk,d));}
+function weekFullyDone(w){return getDays(w).every(d=>dayFullyDone(w.wk,d));}
 
 function hasWorkoutLog(wk){return Object.keys(workoutLogs).some(k=>k.startsWith(`wk${wk}_`));}
 function sessionHasLog(wk,sd){return Object.keys(workoutLogs).some(k=>k.startsWith(`wk${wk}_${sd}_`));}
@@ -659,7 +704,7 @@ function renderWeekList(){
     const done=weekFullyDone(w);
     const c=2*Math.PI*15, off=c-(pct/100)*c;
     const isCur=firstInc&&w.wk===firstInc.wk;
-    const hasPlyo=w.days.some(d=>d.activities.includes('plyo'));
+    const hasPlyo=getDays(w).some(d=>d.activities.includes('plyo'));
     const hasLog=hasWorkoutLog(w.wk);
     let sub=`${w.mi} mi/week`;
     if(w.phase==='AMSTERDAM')sub='B Race · 3:20–3:25';
@@ -672,37 +717,145 @@ function renderWeekList(){
   document.getElementById('weekListContent').innerHTML=html;
 }
 
-function openWeek(wk){currentWeek=wk;showView('detail');}
+function openWeek(wk){currentWeek=wk;editMode=false;showView('detail');}
 
 // ── DETAIL ────────────────────────────────────────────────────────────────────
 function renderDetail(){
   const w=SCHEDULE.find(x=>x.wk===currentWeek);if(!w)return;
+  const days=getDays(w);
   const pct=Math.round(weekScore(w)*100);
-  document.getElementById('detailHeader').innerHTML=`<div class="detail-back" onclick="showView('weeks')">‹ All Weeks</div><div class="detail-title-row"><div class="detail-title">WEEK ${w.wk}</div><div class="detail-badge pc-${w.phase}">${w.phase}</div></div><div class="detail-stats"><div class="stat"><div class="stat-key">Target Miles</div><div class="stat-val">${w.mi} mi</div></div><div class="stat"><div class="stat-key">Complete</div><div class="stat-val">${pct}%</div></div></div>`;
+  const hasOverride=!!weekOverrides[w.wk];
+  document.getElementById('detailHeader').innerHTML=`<div class="detail-back" onclick="exitDetail()">‹ All Weeks</div><div class="detail-title-row"><div class="detail-title">WEEK ${w.wk}</div><div class="detail-badge pc-${w.phase}">${w.phase}</div>${hasOverride?'<span class="override-badge">edited</span>':''}</div><div class="detail-stats"><div class="stat"><div class="stat-key">Target Miles</div><div class="stat-val">${w.mi} mi</div></div><div class="stat"><div class="stat-key">Complete</div><div class="stat-val">${pct}%</div></div></div>`;
+  const isConfirming=resetConfirmWk===w.wk;
+  const resetBtn=hasOverride?(isConfirming
+    ?`<button class="reset-week-btn confirming" onclick="resetWeek(${w.wk})">Tap to confirm</button>`
+    :`<button class="reset-week-btn has-override" onclick="askReset(${w.wk})">Reset</button>`):'';
+  document.getElementById('detailEditBar').innerHTML=`<button class="edit-toggle${editMode?' on':''}" onclick="toggleEditMode()">${editMode?'✓ Done editing':'✎ Edit week'}</button>${resetBtn}`;
   document.getElementById('detailProgress').innerHTML=`<span class="dp-label">WEEK</span><div class="dp-bar"><div class="dp-fill" style="width:${pct}%"></div></div><span class="dp-label">${pct}%</span>`;
-  let html='<div class="section-label">Daily Schedule</div>';
-  w.days.forEach(d=>{
+  let html='';
+  if(editMode){html+='<div class="edit-hint">Tap a day, then tap another to swap · Tap × to remove</div>';}
+  html+='<div class="section-label">Daily Schedule</div>';
+  days.forEach((d,idx)=>{
     const ds=Math.round(dayScore(w.wk,d)*100);
     const allDone=dayFullyDone(w.wk,d);
-    html+=`<div class="day-card${allDone?' full-done':''}">
+    const isEmpty=d.activities.length===0;
+    const isSel=editMode&&selectedIdx===idx;
+    const editAttrs=editMode?` draggable="true" onclick="selectDay(${idx})" ondragstart="dragStart(event,${idx})" ondragover="dragOver(event,${idx})" ondragleave="dragLeave(event)" ondrop="dragDrop(event,${idx})" ondragend="dragEnd(event)"`:'';
+    html+=`<div class="day-card${allDone?' full-done':''}${editMode?' editing':''}${isSel?' selected':''}" data-idx="${idx}"${editAttrs}>
       <div class="day-card-header">
+        ${editMode?'<div class="day-grip">⋮⋮</div>':''}
         <div class="day-label">${d.label}</div>
-        <div class="day-text">${d.text}</div>
-        <div class="day-pct">${ds}%</div>
-      </div>
-      <div class="day-activities">`;
-    d.activities.forEach(act=>{
-      const k=akey(w.wk,d.id,act);
-      const checked=!!actState[k];
-      html+=`<div class="act-pill ${act} ${checked?'checked':'unchecked'}" onclick="toggleAct(${w.wk},'${d.id}','${act}')">
-        <div class="act-check"></div>
-        ${ACT_ICONS[act]||''} ${ACT_LABELS[act]||act}
+        <div class="day-text">${d.text||'<span style="color:var(--text-muted);font-style:italic;">Rest day</span>'}</div>
+        ${editMode?`<div class="day-clear" draggable="false" onclick="event.stopPropagation();clearDay(${idx})" title="Clear to rest day">×</div>`:`<div class="day-pct">${ds}%</div>`}
       </div>`;
-    });
-    html+=`</div></div>`;
+    if(d.activities.length===0){
+      html+=`<div class="day-empty-note">No activities — rest day</div>`;
+    }else{
+      html+=`<div class="day-activities">`;
+      d.activities.forEach((act,actIdx)=>{
+        const k=akey(w.wk,d.id,act);
+        const checked=!!actState[k];
+        const click=editMode?'':`onclick="toggleAct(${w.wk},'${d.id}','${act}')"`;
+        const xBtn=editMode?`<div class="act-pill-x" onclick="event.stopPropagation();removeAct(${idx},${actIdx})">×</div>`:'';
+        html+=`<div class="act-pill ${act} ${checked?'checked':'unchecked'}${editMode?' removable':''}" ${click}>
+          ${editMode?'':'<div class="act-check"></div>'}
+          ${ACT_ICONS[act]||''} ${ACT_LABELS[act]||act}
+          ${xBtn}
+        </div>`;
+      });
+      html+=`</div>`;
+    }
+    html+=`</div>`;
   });
   html+=`<div class="section-label">Week Notes</div><div class="info-cards"><div class="info-card amber-accent"><div class="info-card-label">📋 Coach Notes</div><div class="info-card-body">${w.notes}</div></div><div class="info-card green-accent" onclick="goToWorkout(${w.wk})"><div class="info-card-label">💪 Strength + Plyo</div><div class="info-card-body">Tap to open gym sessions for week ${w.wk} →</div></div></div>`;
   document.getElementById('detailScroll').innerHTML=html;
+}
+
+function exitDetail(){editMode=false;selectedIdx=null;resetConfirmWk=null;showView('weeks');}
+
+function toggleEditMode(){editMode=!editMode;selectedIdx=null;resetConfirmWk=null;renderDetail();}
+
+function selectDay(idx){
+  if(selectedIdx===null){selectedIdx=idx;renderDetail();return;}
+  if(selectedIdx===idx){selectedIdx=null;renderDetail();return;}
+  // Swap selected with idx
+  const days=snapshotDays(currentWeek);
+  const a=days[selectedIdx], b=days[idx];
+  const tmpText=a.text, tmpActs=a.activities;
+  a.text=b.text; a.activities=b.activities;
+  b.text=tmpText; b.activities=tmpActs;
+  selectedIdx=null;
+  commitOverride(currentWeek,days);
+}
+
+// Create a deep copy of the week's days array (always work against current effective days)
+function snapshotDays(wk){
+  const w=SCHEDULE.find(x=>x.wk===wk);
+  return getDays(w).map(d=>({id:d.id,label:d.label,text:d.text,activities:[...d.activities]}));
+}
+
+function commitOverride(wk,days){
+  // Compare against original SCHEDULE to decide whether to keep the override
+  const w=SCHEDULE.find(x=>x.wk===wk);
+  const same=JSON.stringify(days.map(d=>({text:d.text,activities:d.activities})))===
+             JSON.stringify(w.days.map(d=>({text:d.text,activities:d.activities})));
+  if(same){delete weekOverrides[wk];}
+  else{weekOverrides[wk]=days;}
+  saveO();renderDetail();updateOverall();
+}
+
+function askReset(wk){resetConfirmWk=wk;renderDetail();setTimeout(()=>{if(resetConfirmWk===wk){resetConfirmWk=null;renderDetail();}},3500);}
+
+function resetWeek(wk){
+  resetConfirmWk=null;
+  delete weekOverrides[wk];saveO();renderDetail();updateOverall();
+}
+
+function clearDay(idx){
+  const days=snapshotDays(currentWeek);
+  days[idx].text='';
+  days[idx].activities=[];
+  commitOverride(currentWeek,days);
+}
+
+function removeAct(dayIdx,actIdx){
+  const days=snapshotDays(currentWeek);
+  days[dayIdx].activities.splice(actIdx,1);
+  // Rebuild day text by stripping mention of the removed activity is fragile; instead,
+  // leave the text alone — the user can clear the whole day if they want a clean slate.
+  // But if there are no activities left, blank the text so it renders as rest.
+  if(days[dayIdx].activities.length===0)days[dayIdx].text='';
+  commitOverride(currentWeek,days);
+}
+
+// ── DRAG & DROP ───────────────────────────────────────────────────────────────
+function dragStart(e,idx){
+  dragSourceIdx=idx;
+  e.dataTransfer.effectAllowed='move';
+  e.dataTransfer.setData('text/plain',String(idx));
+  e.currentTarget.classList.add('drag-source');
+}
+function dragOver(e,idx){
+  e.preventDefault();
+  e.dataTransfer.dropEffect='move';
+  if(dragSourceIdx!==null&&dragSourceIdx!==idx)e.currentTarget.classList.add('drag-over');
+}
+function dragLeave(e){e.currentTarget.classList.remove('drag-over');}
+function dragDrop(e,targetIdx){
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if(dragSourceIdx===null||dragSourceIdx===targetIdx)return;
+  const days=snapshotDays(currentWeek);
+  // Swap text + activities; keep id and label tied to slot (so MON stays MON)
+  const a=days[dragSourceIdx], b=days[targetIdx];
+  const tmpText=a.text, tmpActs=a.activities;
+  a.text=b.text; a.activities=b.activities;
+  b.text=tmpText; b.activities=tmpActs;
+  commitOverride(currentWeek,days);
+}
+function dragEnd(e){
+  document.querySelectorAll('.day-card').forEach(el=>{el.classList.remove('drag-source');el.classList.remove('drag-over');});
+  dragSourceIdx=null;
 }
 
 function toggleAct(wk,dayId,act){
